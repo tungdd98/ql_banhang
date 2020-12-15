@@ -1,0 +1,12 @@
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\bin\Debug\ql_banhang.exe.config
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\bin\Debug\ql_banhang.exe
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\bin\Debug\ql_banhang.pdb
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.csprojAssemblyReference.cache
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.Login.resources
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.Properties.Resources.resources
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.csproj.GenerateResource.cache
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.csproj.CoreCompileInputs.cache
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.exe
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.pdb
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.pages.AdminManager.resources
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.OrderManager.resources
