@@ -12,6 +12,7 @@ namespace ql_banhang
 {
     public partial class Login : Form
     {
+        QLBanHangDataContext db = new QLBanHangDataContext();
         public Login()
         {
             InitializeComponent();
@@ -32,10 +33,27 @@ namespace ql_banhang
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            OrderManager f = new OrderManager();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+            string username = textBoxUsername.Text;
+            string password = textBoxPassword.Text;
+            if (username == "" || password == "")
+            {
+                MessageBox.Show("Username và password không được để rỗng");
+                return;
+            }
+            NhanVien nhanVien = db.NhanViens.SingleOrDefault(nv => nv.Username == username && nv.Password == password);
+
+            if (nhanVien != null)
+            {
+                OrderManager f = new OrderManager();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+                textBoxPassword.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu");
+            }
         }
     }
 }

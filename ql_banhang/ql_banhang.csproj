@@ -47,12 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="controller\Authenticate.cs" />
     <Compile Include="pages\AdminManager.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="pages\AdminManager.Designer.cs">
       <DependentUpon>AdminManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\EditLoaiSP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\EditLoaiSP.Designer.cs">
+      <DependentUpon>EditLoaiSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\EditSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\EditSanPham.Designer.cs">
+      <DependentUpon>EditSanPham.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\Login.cs">
       <SubType>Form</SubType>
@@ -74,8 +85,19 @@
     <Compile Include="pages\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
+    <Compile Include="QLBanHang.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBanHang.dbml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="pages\AdminManager.resx">
       <DependentUpon>AdminManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EditLoaiSP.resx">
+      <DependentUpon>EditLoaiSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EditSanPham.resx">
+      <DependentUpon>EditSanPham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -101,6 +123,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="QLBanHang.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>QLBanHang.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QLBanHang.dbml.layout">
+      <DependentUpon>QLBanHang.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

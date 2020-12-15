@@ -66,6 +66,7 @@ namespace ql_banhang
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(246, 29);
             this.textBoxUsername.TabIndex = 2;
+            this.textBoxUsername.Text = "admin";
             // 
             // textBoxPassword
             // 
@@ -73,6 +74,7 @@ namespace ql_banhang
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(246, 29);
             this.textBoxPassword.TabIndex = 4;
+            this.textBoxPassword.Text = "123456789";
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // label3
@@ -119,7 +121,7 @@ namespace ql_banhang
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";

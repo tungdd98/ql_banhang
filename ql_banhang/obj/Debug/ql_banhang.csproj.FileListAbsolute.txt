@@ -10,3 +10,5 @@ C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.exe
 C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.pdb
 C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.pages.AdminManager.resources
 C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.OrderManager.resources
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.pages.EditLoaiSP.resources
+C:\Users\ASUS-S510\Desktop\ql_banhang\ql_banhang\obj\Debug\ql_banhang.pages.EditSanPham.resources
