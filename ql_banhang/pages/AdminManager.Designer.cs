@@ -614,6 +614,7 @@ namespace ql_banhang.pages
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AdminManager";
             this.Text = "Admin";
+            this.Activated += new System.EventHandler(this.AdminManager_Activated);
             this.Load += new System.EventHandler(this.AdminManager_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPageCategory.ResumeLayout(false);

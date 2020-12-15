@@ -22,6 +22,11 @@ namespace ql_banhang.pages
             ShowLoaiSP();
         }
 
+        private void AdminManager_Activated(object sender, EventArgs e)
+        {
+            ShowLoaiSP();
+        }
+
         private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
             switch (e.TabPageIndex)
@@ -43,7 +48,7 @@ namespace ql_banhang.pages
             Manager LoaiSanPham
             @author: Dang Duc Tung
          */
-        public void ShowLoaiSP()
+        private void ShowLoaiSP()
         {
             dataGridViewLoaiSP.Rows.Clear();
             var list = from item in db.LoaiSanPhams
