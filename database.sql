@@ -109,7 +109,7 @@ Create table NhanVien (
 Insert into NhanVien values 
 	('admin', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1),
 	('admin1', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1),
-	('admin2', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1),
+	('admin2', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1)
 
 -- HoaDon
 Create table HoaDon (
@@ -137,4 +137,4 @@ Insert into ChiTietHoaDon values
 	(1, 2, 5),
 	(1, 3, 6)
 
-Select * from NhanVien
+Select * from LoaiSanPham
