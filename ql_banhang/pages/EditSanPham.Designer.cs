@@ -197,6 +197,7 @@ namespace ql_banhang.pages
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "EditSanPham";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cập nhật thông tin sản phẩm";
             this.Load += new System.EventHandler(this.EditSanPham_Load);
             this.ResumeLayout(false);

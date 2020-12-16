@@ -265,7 +265,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="HoaDon_ChiTietHoaDon", Storage="_HoaDon", ThisKey="MaHD", OtherKey="MaHD", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="HoaDon_ChiTietHoaDon", Storage="_HoaDon", ThisKey="MaHD", OtherKey="MaHD", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public HoaDon HoaDon
 		{
 			get
@@ -299,7 +299,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_ChiTietHoaDon", Storage="_SanPham", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_ChiTietHoaDon", Storage="_SanPham", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public SanPham SanPham
 		{
 			get
@@ -481,7 +481,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuNhap_ChiTietPhieuNhap", Storage="_PhieuNhap", ThisKey="MaPN", OtherKey="MaPN", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuNhap_ChiTietPhieuNhap", Storage="_PhieuNhap", ThisKey="MaPN", OtherKey="MaPN", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public PhieuNhap PhieuNhap
 		{
 			get
@@ -515,7 +515,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_ChiTietPhieuNhap", Storage="_SanPham", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SanPham_ChiTietPhieuNhap", Storage="_SanPham", ThisKey="MaSP", OtherKey="MaSP", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public SanPham SanPham
 		{
 			get
@@ -580,6 +580,10 @@ namespace ql_banhang
 		
 		private System.Nullable<System.DateTime> _NgayLap;
 		
+		private string _GhiChu;
+		
+		private System.Nullable<int> _TongTien;
+		
 		private System.Nullable<int> _MaKH;
 		
 		private System.Nullable<int> _MaNV;
@@ -598,6 +602,10 @@ namespace ql_banhang
     partial void OnMaHDChanged();
     partial void OnNgayLapChanging(System.Nullable<System.DateTime> value);
     partial void OnNgayLapChanged();
+    partial void OnGhiChuChanging(string value);
+    partial void OnGhiChuChanged();
+    partial void OnTongTienChanging(System.Nullable<int> value);
+    partial void OnTongTienChanged();
     partial void OnMaKHChanging(System.Nullable<int> value);
     partial void OnMaKHChanged();
     partial void OnMaNVChanging(System.Nullable<int> value);
@@ -648,6 +656,46 @@ namespace ql_banhang
 					this._NgayLap = value;
 					this.SendPropertyChanged("NgayLap");
 					this.OnNgayLapChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GhiChu", DbType="NVarChar(100)")]
+		public string GhiChu
+		{
+			get
+			{
+				return this._GhiChu;
+			}
+			set
+			{
+				if ((this._GhiChu != value))
+				{
+					this.OnGhiChuChanging(value);
+					this.SendPropertyChanging();
+					this._GhiChu = value;
+					this.SendPropertyChanged("GhiChu");
+					this.OnGhiChuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TongTien", DbType="Int")]
+		public System.Nullable<int> TongTien
+		{
+			get
+			{
+				return this._TongTien;
+			}
+			set
+			{
+				if ((this._TongTien != value))
+				{
+					this.OnTongTienChanging(value);
+					this.SendPropertyChanging();
+					this._TongTien = value;
+					this.SendPropertyChanged("TongTien");
+					this.OnTongTienChanged();
 				}
 			}
 		}
@@ -713,7 +761,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KhachHang_HoaDon", Storage="_KhachHang", ThisKey="MaKH", OtherKey="MaKH", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KhachHang_HoaDon", Storage="_KhachHang", ThisKey="MaKH", OtherKey="MaKH", IsForeignKey=true, DeleteRule="CASCADE")]
 		public KhachHang KhachHang
 		{
 			get
@@ -747,7 +795,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhanVien_HoaDon", Storage="_NhanVien", ThisKey="MaNV", OtherKey="MaNV", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhanVien_HoaDon", Storage="_NhanVien", ThisKey="MaNV", OtherKey="MaNV", IsForeignKey=true, DeleteRule="CASCADE")]
 		public NhanVien NhanVien
 		{
 			get
@@ -1622,7 +1670,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhaCungCap_PhieuNhap", Storage="_NhaCungCap", ThisKey="MaNCC", OtherKey="MaNCC", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhaCungCap_PhieuNhap", Storage="_NhaCungCap", ThisKey="MaNCC", OtherKey="MaNCC", IsForeignKey=true, DeleteRule="CASCADE")]
 		public NhaCungCap NhaCungCap
 		{
 			get
@@ -1889,7 +1937,7 @@ namespace ql_banhang
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiSanPham_SanPham", Storage="_LoaiSanPham", ThisKey="MaLSP", OtherKey="MaLSP", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiSanPham_SanPham", Storage="_LoaiSanPham", ThisKey="MaLSP", OtherKey="MaLSP", IsForeignKey=true, DeleteRule="CASCADE")]
 		public LoaiSanPham LoaiSanPham
 		{
 			get
