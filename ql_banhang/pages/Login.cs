@@ -45,6 +45,7 @@ namespace ql_banhang
             if (nhanVien != null)
             {
                 OrderManager f = new OrderManager();
+                f.Tag = nhanVien;
                 this.Hide();
                 f.ShowDialog();
                 this.Show();

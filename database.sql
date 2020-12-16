@@ -67,11 +67,11 @@ Insert into PhieuNhap values
 
 -- ChiTietPhieuNhap
 Create table ChiTietPhieuNhap (
-	MaPN int not null,
-	MaSP int not null,
+	MaPN int foreign key references PhieuNhap(MaPN),
+	MaSP int foreign key references SanPham(MaSP),
 	DonGiaNhap int default 0,
 	SoLuongNhap int default 0,
-	CONSTRAINT PK_ChiTietPhieuNhap PRIMARY KEY (MaPN, MaSP)
+	PRIMARY KEY (MaPN, MaSP)
 )
 
 Insert into ChiTietPhieuNhap values 
@@ -83,7 +83,7 @@ Insert into ChiTietPhieuNhap values
 Create table KhachHang (
 	MaKH int IDENTITY(1,1) PRIMARY KEY,
 	TenKH nvarchar(100),
-	SoDienThoai char(20) null,
+	SoDienThoai char(20) unique,
 	DiemTichLuy int default 0
 )
 
@@ -109,14 +109,14 @@ Create table NhanVien (
 Insert into NhanVien values 
 	('admin', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1),
 	('admin1', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1),
-	('admin2', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1),
+	('admin2', '123456789', 'Nhan vien A', '0973793711', '1998/1/9', N'Hà Nội', 1)
 
 -- HoaDon
 Create table HoaDon (
 	MaHD int IDENTITY(1,1) PRIMARY KEY,
 	NgayLap date default GetDate(),
-	MaKH int FOREIGN KEY REFERENCES KhachHang(MaKH) NULL,
-	MaNV int FOREIGN KEY REFERENCES NhanVien(MaNV) NULL
+	MaKH int FOREIGN KEY REFERENCES KhachHang(MaKH),
+	MaNV int FOREIGN KEY REFERENCES NhanVien(MaNV)
 )
 
 Insert into HoaDon values 
@@ -126,10 +126,10 @@ Insert into HoaDon values
 
 -- ChiTietHoaDon
 Create table ChiTietHoaDon (
-	MaHD int,
-	MaSP int,
+	MaHD int FOREIGN KEY REFERENCES HoaDon(MaHD),
+	MaSP int FOREIGN KEY REFERENCES SanPham(MaSP),
 	SoLuongMua int default 1,
-	CONSTRAINT PK_ChiTietHoaDon PRIMARY KEY (MaHD, MaSP)
+	PRIMARY KEY (MaHD, MaSP)
 )
 
 Insert into ChiTietHoaDon values 
@@ -137,4 +137,4 @@ Insert into ChiTietHoaDon values
 	(1, 2, 5),
 	(1, 3, 6)
 
-Select * from NhanVien
+Select * from ChiTietHoaDon
