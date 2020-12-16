@@ -81,21 +81,6 @@ namespace ql_banhang.pages
             this.panel6 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPageNCC = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.buttonClearSearchNCC = new System.Windows.Forms.Button();
-            this.buttonSearchNCC = new System.Windows.Forms.Button();
-            this.textBoxSearchNCC = new System.Windows.Forms.TextBox();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.textBoxTenNCC = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.buttonClearNCC = new System.Windows.Forms.Button();
-            this.buttonAddNCC = new System.Windows.Forms.Button();
             this.panel15 = new System.Windows.Forms.Panel();
             this.dataGridViewNCC = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,10 +89,25 @@ namespace ql_banhang.pages
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewLinkColumn3 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.dataGridViewLinkColumn4 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.textBoxDiaChiNCC = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.buttonClearNCC = new System.Windows.Forms.Button();
+            this.buttonAddNCC = new System.Windows.Forms.Button();
+            this.panel13 = new System.Windows.Forms.Panel();
             this.textBoxSoDienThoaiNCC = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.textBoxDiaChiNCC = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxTenNCC = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.buttonClearSearchNCC = new System.Windows.Forms.Button();
+            this.buttonSearchNCC = new System.Windows.Forms.Button();
+            this.textBoxSearchNCC = new System.Windows.Forms.TextBox();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabPageCategory.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -124,12 +124,12 @@ namespace ql_banhang.pages
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSanPham)).BeginInit();
             this.panel6.SuspendLayout();
             this.tabPageNCC.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel14.SuspendLayout();
             this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNCC)).BeginInit();
+            this.panel14.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -168,7 +168,7 @@ namespace ql_banhang.pages
             // 
             this.panel5.Controls.Add(this.buttonClearLoaiSP);
             this.panel5.Controls.Add(this.buttonAddLoaiSP);
-            this.panel5.Location = new System.Drawing.Point(657, 462);
+            this.panel5.Location = new System.Drawing.Point(657, 460);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(482, 58);
             this.panel5.TabIndex = 4;
@@ -385,14 +385,14 @@ namespace ql_banhang.pages
             // comboBoxLoaiSP
             // 
             this.comboBoxLoaiSP.FormattingEnabled = true;
-            this.comboBoxLoaiSP.Location = new System.Drawing.Point(12, 84);
+            this.comboBoxLoaiSP.Location = new System.Drawing.Point(17, 86);
             this.comboBoxLoaiSP.Name = "comboBoxLoaiSP";
             this.comboBoxLoaiSP.Size = new System.Drawing.Size(340, 25);
             this.comboBoxLoaiSP.TabIndex = 12;
             // 
             // textBoxSoLuongSP
             // 
-            this.textBoxSoLuongSP.Location = new System.Drawing.Point(12, 240);
+            this.textBoxSoLuongSP.Location = new System.Drawing.Point(17, 242);
             this.textBoxSoLuongSP.Name = "textBoxSoLuongSP";
             this.textBoxSoLuongSP.Size = new System.Drawing.Size(340, 25);
             this.textBoxSoLuongSP.TabIndex = 11;
@@ -400,7 +400,7 @@ namespace ql_banhang.pages
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 220);
+            this.label8.Location = new System.Drawing.Point(14, 222);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 17);
             this.label8.TabIndex = 10;
@@ -408,7 +408,7 @@ namespace ql_banhang.pages
             // 
             // textBoxKhuyenMaiSP
             // 
-            this.textBoxKhuyenMaiSP.Location = new System.Drawing.Point(12, 189);
+            this.textBoxKhuyenMaiSP.Location = new System.Drawing.Point(17, 191);
             this.textBoxKhuyenMaiSP.Name = "textBoxKhuyenMaiSP";
             this.textBoxKhuyenMaiSP.Size = new System.Drawing.Size(340, 25);
             this.textBoxKhuyenMaiSP.TabIndex = 9;
@@ -416,7 +416,7 @@ namespace ql_banhang.pages
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 169);
+            this.label7.Location = new System.Drawing.Point(14, 171);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 17);
             this.label7.TabIndex = 8;
@@ -424,7 +424,7 @@ namespace ql_banhang.pages
             // 
             // textBoxDonGiaSP
             // 
-            this.textBoxDonGiaSP.Location = new System.Drawing.Point(12, 136);
+            this.textBoxDonGiaSP.Location = new System.Drawing.Point(17, 138);
             this.textBoxDonGiaSP.Name = "textBoxDonGiaSP";
             this.textBoxDonGiaSP.Size = new System.Drawing.Size(340, 25);
             this.textBoxDonGiaSP.TabIndex = 7;
@@ -432,7 +432,7 @@ namespace ql_banhang.pages
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 116);
+            this.label6.Location = new System.Drawing.Point(14, 118);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 17);
             this.label6.TabIndex = 6;
@@ -441,7 +441,7 @@ namespace ql_banhang.pages
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 63);
+            this.label5.Location = new System.Drawing.Point(14, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 17);
             this.label5.TabIndex = 4;
@@ -449,7 +449,7 @@ namespace ql_banhang.pages
             // 
             // textBoxTenSP
             // 
-            this.textBoxTenSP.Location = new System.Drawing.Point(12, 30);
+            this.textBoxTenSP.Location = new System.Drawing.Point(17, 32);
             this.textBoxTenSP.Name = "textBoxTenSP";
             this.textBoxTenSP.Size = new System.Drawing.Size(340, 25);
             this.textBoxTenSP.TabIndex = 3;
@@ -457,7 +457,7 @@ namespace ql_banhang.pages
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 10);
+            this.label4.Location = new System.Drawing.Point(14, 12);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 17);
             this.label4.TabIndex = 0;
@@ -589,7 +589,7 @@ namespace ql_banhang.pages
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 22);
+            this.label9.Location = new System.Drawing.Point(3, 12);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(212, 32);
             this.label9.TabIndex = 1;
@@ -609,145 +609,6 @@ namespace ql_banhang.pages
             this.tabPageNCC.TabIndex = 2;
             this.tabPageNCC.Text = "Nhà cung cấp";
             this.tabPageNCC.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1145, 527);
-            this.tabPage2.TabIndex = 3;
-            this.tabPage2.Text = "Khách hàng";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1145, 527);
-            this.tabPage3.TabIndex = 4;
-            this.tabPage3.Text = "Nhân viên";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 26);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1145, 527);
-            this.tabPage4.TabIndex = 5;
-            this.tabPage4.Text = "Doanh thu";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.label3);
-            this.panel11.Location = new System.Drawing.Point(6, 3);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(644, 70);
-            this.panel11.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(252, 32);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Quản lý nhà cung cấp";
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.buttonClearSearchNCC);
-            this.panel12.Controls.Add(this.buttonSearchNCC);
-            this.panel12.Controls.Add(this.textBoxSearchNCC);
-            this.panel12.Location = new System.Drawing.Point(656, 3);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(482, 69);
-            this.panel12.TabIndex = 3;
-            // 
-            // buttonClearSearchNCC
-            // 
-            this.buttonClearSearchNCC.Location = new System.Drawing.Point(433, 19);
-            this.buttonClearSearchNCC.Name = "buttonClearSearchNCC";
-            this.buttonClearSearchNCC.Size = new System.Drawing.Size(35, 27);
-            this.buttonClearSearchNCC.TabIndex = 2;
-            this.buttonClearSearchNCC.Text = "X";
-            this.buttonClearSearchNCC.UseVisualStyleBackColor = true;
-            // 
-            // buttonSearchNCC
-            // 
-            this.buttonSearchNCC.Location = new System.Drawing.Point(349, 19);
-            this.buttonSearchNCC.Name = "buttonSearchNCC";
-            this.buttonSearchNCC.Size = new System.Drawing.Size(78, 27);
-            this.buttonSearchNCC.TabIndex = 1;
-            this.buttonSearchNCC.Text = "Tìm kiếm";
-            this.buttonSearchNCC.UseVisualStyleBackColor = true;
-            // 
-            // textBoxSearchNCC
-            // 
-            this.textBoxSearchNCC.Location = new System.Drawing.Point(17, 20);
-            this.textBoxSearchNCC.Name = "textBoxSearchNCC";
-            this.textBoxSearchNCC.Size = new System.Drawing.Size(326, 25);
-            this.textBoxSearchNCC.TabIndex = 0;
-            // 
-            // panel13
-            // 
-            this.panel13.Controls.Add(this.textBoxSoDienThoaiNCC);
-            this.panel13.Controls.Add(this.label12);
-            this.panel13.Controls.Add(this.textBoxDiaChiNCC);
-            this.panel13.Controls.Add(this.label11);
-            this.panel13.Controls.Add(this.textBoxTenNCC);
-            this.panel13.Controls.Add(this.label10);
-            this.panel13.Location = new System.Drawing.Point(657, 80);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(482, 375);
-            this.panel13.TabIndex = 4;
-            // 
-            // textBoxTenNCC
-            // 
-            this.textBoxTenNCC.Location = new System.Drawing.Point(17, 37);
-            this.textBoxTenNCC.Name = "textBoxTenNCC";
-            this.textBoxTenNCC.Size = new System.Drawing.Size(340, 25);
-            this.textBoxTenNCC.TabIndex = 2;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 17);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(113, 17);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Tên nhà cung cấp:";
-            // 
-            // panel14
-            // 
-            this.panel14.Controls.Add(this.buttonClearNCC);
-            this.panel14.Controls.Add(this.buttonAddNCC);
-            this.panel14.Location = new System.Drawing.Point(657, 462);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(482, 58);
-            this.panel14.TabIndex = 5;
-            // 
-            // buttonClearNCC
-            // 
-            this.buttonClearNCC.Location = new System.Drawing.Point(379, 3);
-            this.buttonClearNCC.Name = "buttonClearNCC";
-            this.buttonClearNCC.Size = new System.Drawing.Size(100, 51);
-            this.buttonClearNCC.TabIndex = 1;
-            this.buttonClearNCC.Text = "Clear";
-            this.buttonClearNCC.UseVisualStyleBackColor = true;
-            // 
-            // buttonAddNCC
-            // 
-            this.buttonAddNCC.Location = new System.Drawing.Point(273, 3);
-            this.buttonAddNCC.Name = "buttonAddNCC";
-            this.buttonAddNCC.Size = new System.Drawing.Size(100, 51);
-            this.buttonAddNCC.TabIndex = 0;
-            this.buttonAddNCC.Text = "Thêm mới";
-            this.buttonAddNCC.UseVisualStyleBackColor = true;
             // 
             // panel15
             // 
@@ -771,6 +632,7 @@ namespace ql_banhang.pages
             this.dataGridViewNCC.Name = "dataGridViewNCC";
             this.dataGridViewNCC.Size = new System.Drawing.Size(644, 441);
             this.dataGridViewNCC.TabIndex = 0;
+            this.dataGridViewNCC.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewNCC_CellContentClick);
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -808,25 +670,51 @@ namespace ql_banhang.pages
             this.dataGridViewLinkColumn4.HeaderText = "";
             this.dataGridViewLinkColumn4.Name = "dataGridViewLinkColumn4";
             // 
-            // textBoxDiaChiNCC
+            // panel14
             // 
-            this.textBoxDiaChiNCC.Location = new System.Drawing.Point(16, 88);
-            this.textBoxDiaChiNCC.Name = "textBoxDiaChiNCC";
-            this.textBoxDiaChiNCC.Size = new System.Drawing.Size(340, 25);
-            this.textBoxDiaChiNCC.TabIndex = 4;
+            this.panel14.Controls.Add(this.buttonClearNCC);
+            this.panel14.Controls.Add(this.buttonAddNCC);
+            this.panel14.Location = new System.Drawing.Point(657, 460);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(482, 58);
+            this.panel14.TabIndex = 5;
             // 
-            // label11
+            // buttonClearNCC
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 68);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(50, 17);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Địa chỉ:";
+            this.buttonClearNCC.Location = new System.Drawing.Point(379, 3);
+            this.buttonClearNCC.Name = "buttonClearNCC";
+            this.buttonClearNCC.Size = new System.Drawing.Size(100, 51);
+            this.buttonClearNCC.TabIndex = 1;
+            this.buttonClearNCC.Text = "Clear";
+            this.buttonClearNCC.UseVisualStyleBackColor = true;
+            this.buttonClearNCC.Click += new System.EventHandler(this.buttonClearNCC_Click);
+            // 
+            // buttonAddNCC
+            // 
+            this.buttonAddNCC.Location = new System.Drawing.Point(273, 3);
+            this.buttonAddNCC.Name = "buttonAddNCC";
+            this.buttonAddNCC.Size = new System.Drawing.Size(100, 51);
+            this.buttonAddNCC.TabIndex = 0;
+            this.buttonAddNCC.Text = "Thêm mới";
+            this.buttonAddNCC.UseVisualStyleBackColor = true;
+            this.buttonAddNCC.Click += new System.EventHandler(this.buttonAddNCC_Click);
+            // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.textBoxSoDienThoaiNCC);
+            this.panel13.Controls.Add(this.label12);
+            this.panel13.Controls.Add(this.textBoxDiaChiNCC);
+            this.panel13.Controls.Add(this.label11);
+            this.panel13.Controls.Add(this.textBoxTenNCC);
+            this.panel13.Controls.Add(this.label10);
+            this.panel13.Location = new System.Drawing.Point(657, 80);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(482, 375);
+            this.panel13.TabIndex = 4;
             // 
             // textBoxSoDienThoaiNCC
             // 
-            this.textBoxSoDienThoaiNCC.Location = new System.Drawing.Point(16, 141);
+            this.textBoxSoDienThoaiNCC.Location = new System.Drawing.Point(17, 92);
             this.textBoxSoDienThoaiNCC.Name = "textBoxSoDienThoaiNCC";
             this.textBoxSoDienThoaiNCC.Size = new System.Drawing.Size(340, 25);
             this.textBoxSoDienThoaiNCC.TabIndex = 6;
@@ -834,11 +722,130 @@ namespace ql_banhang.pages
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 121);
+            this.label12.Location = new System.Drawing.Point(14, 72);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(92, 17);
             this.label12.TabIndex = 5;
             this.label12.Text = "Số điện thoại: ";
+            // 
+            // textBoxDiaChiNCC
+            // 
+            this.textBoxDiaChiNCC.Location = new System.Drawing.Point(17, 147);
+            this.textBoxDiaChiNCC.Multiline = true;
+            this.textBoxDiaChiNCC.Name = "textBoxDiaChiNCC";
+            this.textBoxDiaChiNCC.Size = new System.Drawing.Size(340, 103);
+            this.textBoxDiaChiNCC.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(14, 127);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(50, 17);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Địa chỉ:";
+            // 
+            // textBoxTenNCC
+            // 
+            this.textBoxTenNCC.Location = new System.Drawing.Point(17, 37);
+            this.textBoxTenNCC.Name = "textBoxTenNCC";
+            this.textBoxTenNCC.Size = new System.Drawing.Size(340, 25);
+            this.textBoxTenNCC.TabIndex = 2;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(14, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(113, 17);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Tên nhà cung cấp:";
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.buttonClearSearchNCC);
+            this.panel12.Controls.Add(this.buttonSearchNCC);
+            this.panel12.Controls.Add(this.textBoxSearchNCC);
+            this.panel12.Location = new System.Drawing.Point(657, 4);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(482, 69);
+            this.panel12.TabIndex = 3;
+            // 
+            // buttonClearSearchNCC
+            // 
+            this.buttonClearSearchNCC.Location = new System.Drawing.Point(433, 19);
+            this.buttonClearSearchNCC.Name = "buttonClearSearchNCC";
+            this.buttonClearSearchNCC.Size = new System.Drawing.Size(35, 27);
+            this.buttonClearSearchNCC.TabIndex = 2;
+            this.buttonClearSearchNCC.Text = "X";
+            this.buttonClearSearchNCC.UseVisualStyleBackColor = true;
+            this.buttonClearSearchNCC.Click += new System.EventHandler(this.buttonClearSearchNCC_Click);
+            // 
+            // buttonSearchNCC
+            // 
+            this.buttonSearchNCC.Location = new System.Drawing.Point(349, 19);
+            this.buttonSearchNCC.Name = "buttonSearchNCC";
+            this.buttonSearchNCC.Size = new System.Drawing.Size(78, 27);
+            this.buttonSearchNCC.TabIndex = 1;
+            this.buttonSearchNCC.Text = "Tìm kiếm";
+            this.buttonSearchNCC.UseVisualStyleBackColor = true;
+            this.buttonSearchNCC.Click += new System.EventHandler(this.buttonSearchNCC_Click);
+            // 
+            // textBoxSearchNCC
+            // 
+            this.textBoxSearchNCC.Location = new System.Drawing.Point(17, 20);
+            this.textBoxSearchNCC.Name = "textBoxSearchNCC";
+            this.textBoxSearchNCC.Size = new System.Drawing.Size(326, 25);
+            this.textBoxSearchNCC.TabIndex = 0;
+            this.textBoxSearchNCC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSearchNCC_KeyPress);
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.label3);
+            this.panel11.Location = new System.Drawing.Point(6, 3);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(644, 70);
+            this.panel11.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(252, 32);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Quản lý nhà cung cấp";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1145, 527);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Khách hàng";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1145, 527);
+            this.tabPage3.TabIndex = 4;
+            this.tabPage3.Text = "Nhân viên";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 26);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1145, 527);
+            this.tabPage4.TabIndex = 5;
+            this.tabPage4.Text = "Doanh thu";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // AdminManager
             // 
@@ -875,15 +882,15 @@ namespace ql_banhang.pages
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.tabPageNCC.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel14.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNCC)).EndInit();
+            this.panel14.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.ResumeLayout(false);
 
         }

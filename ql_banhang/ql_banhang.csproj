@@ -59,6 +59,12 @@
     <Compile Include="pages\EditLoaiSP.Designer.cs">
       <DependentUpon>EditLoaiSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\EditNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\EditNhaCungCap.Designer.cs">
+      <DependentUpon>EditNhaCungCap.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\EditSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EditLoaiSP.resx">
       <DependentUpon>EditLoaiSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EditNhaCungCap.resx">
+      <DependentUpon>EditNhaCungCap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EditSanPham.resx">
       <DependentUpon>EditSanPham.cs</DependentUpon>
