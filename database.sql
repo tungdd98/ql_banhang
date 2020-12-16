@@ -45,7 +45,7 @@ Create table SanPham (
 	DonGia int default 0,
 	KhuyenMai float null,
 	SoLuong int default 0,
-	MaLSP int foreign key references LoaiSanPham(MaLSP)
+	MaLSP int foreign key references LoaiSanPham(MaLSP) on delete cascade on update cascade
 )
 
 Insert into SanPham values
@@ -57,7 +57,7 @@ Insert into SanPham values
 Create table PhieuNhap (
 	MaPN int IDENTITY(1,1) PRIMARY KEY,
 	NgayLap date DEFAULT GETDATE(),
-	MaNCC int foreign key references NhaCungCap(MaNCC)
+	MaNCC int foreign key references NhaCungCap(MaNCC) on delete cascade on update cascade
 )
 
 Insert into PhieuNhap values 
@@ -67,8 +67,8 @@ Insert into PhieuNhap values
 
 -- ChiTietPhieuNhap
 Create table ChiTietPhieuNhap (
-	MaPN int foreign key references PhieuNhap(MaPN),
-	MaSP int foreign key references SanPham(MaSP),
+	MaPN int foreign key references PhieuNhap(MaPN) on delete cascade on update cascade,
+	MaSP int foreign key references SanPham(MaSP) on delete cascade on update cascade,
 	DonGiaNhap int default 0,
 	SoLuongNhap int default 0,
 	PRIMARY KEY (MaPN, MaSP)
@@ -115,8 +115,8 @@ Insert into NhanVien values
 Create table HoaDon (
 	MaHD int IDENTITY(1,1) PRIMARY KEY,
 	NgayLap date default GetDate(),
-	MaKH int FOREIGN KEY REFERENCES KhachHang(MaKH),
-	MaNV int FOREIGN KEY REFERENCES NhanVien(MaNV)
+	MaKH int FOREIGN KEY REFERENCES KhachHang(MaKH) on delete cascade on update cascade,
+	MaNV int FOREIGN KEY REFERENCES NhanVien(MaNV) on delete cascade on update cascade
 )
 
 Insert into HoaDon values 
@@ -126,8 +126,8 @@ Insert into HoaDon values
 
 -- ChiTietHoaDon
 Create table ChiTietHoaDon (
-	MaHD int FOREIGN KEY REFERENCES HoaDon(MaHD),
-	MaSP int FOREIGN KEY REFERENCES SanPham(MaSP),
+	MaHD int FOREIGN KEY REFERENCES HoaDon(MaHD) on delete cascade on update cascade,
+	MaSP int FOREIGN KEY REFERENCES SanPham(MaSP) on delete cascade on update cascade,
 	SoLuongMua int default 1,
 	PRIMARY KEY (MaHD, MaSP)
 )
