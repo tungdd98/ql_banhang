@@ -39,6 +39,9 @@ namespace ql_banhang.pages
                     ShowSanPham();
                     ShowComboboxLoaiSP();
                     break;
+                case 2:
+                    ShowNhaCungCap();
+                    break;
                 default:
                     ShowLoaiSP();
                     break;
@@ -380,6 +383,142 @@ namespace ql_banhang.pages
             {
                 SearchSanPham();
             }
+        }
+
+        /*
+            NhaCungCap
+            @author: Duong Van Duc
+         */
+        private void ShowNhaCungCap()
+        {
+            dataGridViewNCC.Rows.Clear();
+            var list = from item in db.NhaCungCaps
+                       orderby item.MaNCC descending
+                       select new { item.MaNCC, item.TenNCC, item.DiaChi, item.SoDienThoai };
+
+            foreach (var item in list)
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridViewNCC.Rows[0].Clone();
+
+                row.Cells[0].Value = item.MaNCC;
+                row.Cells[1].Value = item.TenNCC;
+                row.Cells[2].Value = item.DiaChi;
+                row.Cells[3].Value = item.SoDienThoai;
+
+                row.Cells[4].Value = "Cập nhật";
+                row.Cells[5].Value = "Xoá";
+
+                dataGridViewNCC.Rows.Add(row);
+            }
+        }
+
+        private void buttonAddNCC_Click(object sender, EventArgs e)
+        {
+            if (textBoxTenNCC.Text == "")
+            {
+                MessageBox.Show("Tên nhà cung cấp không được để trống", "Thông báo");
+                return;
+            }
+
+            NhaCungCap ncc = new NhaCungCap();
+            ncc.TenNCC = textBoxTenNCC.Text;
+            ncc.DiaChi = textBoxDiaChiNCC.Text;
+            ncc.SoDienThoai = textBoxSoDienThoaiNCC.Text;
+
+            db.NhaCungCaps.InsertOnSubmit(ncc);
+            db.SubmitChanges();
+            ShowNhaCungCap();
+        }
+
+        private void buttonClearNCC_Click(object sender, EventArgs e)
+        {
+            textBoxTenNCC.Clear();
+            textBoxDiaChiNCC.Clear();
+            textBoxSoDienThoaiNCC.Clear();
+        }
+
+        private void dataGridViewNCC_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = int.Parse(dataGridViewNCC.Rows[e.RowIndex].Cells[0].Value.ToString());
+            NhaCungCap itemChange = db.NhaCungCaps.SingleOrDefault(item => item.MaNCC == id);
+
+            if (e.ColumnIndex == 5)
+            {
+                var confirmMsg = MessageBox.Show("Bạn có muốn xoá?", "Thông báo", MessageBoxButtons.YesNo);
+
+                if (confirmMsg == DialogResult.Yes)
+                {
+                    db.NhaCungCaps.DeleteOnSubmit(itemChange);
+                    db.SubmitChanges();
+                    ShowNhaCungCap();
+                }
+            }
+
+            if (e.ColumnIndex == 4)
+            {
+                EditNhaCungCap f = new EditNhaCungCap();
+                f.Tag = id;
+                tabIndex = 2;
+                f.ShowDialog();
+            }
+        }
+
+        private void SearchNhaCungCap()
+        {
+            dataGridViewNCC.Rows.Clear();
+            string search = textBoxSearchNCC.Text;
+
+            if (search == "")
+            {
+                ShowNhaCungCap();
+                return;
+            }
+
+            var listSearch = from item in db.NhaCungCaps
+                             where item.TenNCC.Contains(search)
+                             orderby item.MaNCC descending
+                             select new { item.MaNCC, item.TenNCC, item.DiaChi, item.SoDienThoai };
+
+            if (listSearch.Count() == 0)
+            {
+                MessageBox.Show("Không tìm thấy nhà cung cấp với từ khoá " + search);
+            }
+            else
+            {
+                foreach (var item in listSearch)
+                {
+                    DataGridViewRow row = (DataGridViewRow)dataGridViewNCC.Rows[0].Clone();
+
+                    row.Cells[0].Value = item.MaNCC;
+                    row.Cells[1].Value = item.TenNCC;
+                    row.Cells[2].Value = item.DiaChi;
+                    row.Cells[3].Value = item.SoDienThoai;
+
+                    row.Cells[4].Value = "Cập nhật";
+                    row.Cells[5].Value = "Xoá";
+
+                    dataGridViewNCC.Rows.Add(row);
+                }
+            }
+        }
+
+        private void textBoxSearchNCC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                SearchNhaCungCap();
+            }
+        }
+
+        private void buttonSearchNCC_Click(object sender, EventArgs e)
+        {
+            SearchNhaCungCap();
+        }
+
+        private void buttonClearSearchNCC_Click(object sender, EventArgs e)
+        {
+            textBoxSearchNCC.Clear();
+            SearchNhaCungCap();
         }
     }
 }
