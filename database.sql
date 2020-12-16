@@ -115,14 +115,16 @@ Insert into NhanVien values
 Create table HoaDon (
 	MaHD int IDENTITY(1,1) PRIMARY KEY,
 	NgayLap date default GetDate(),
+	GhiChu nvarchar(100) null,
+	TongTien int null,
 	MaKH int FOREIGN KEY REFERENCES KhachHang(MaKH) on delete cascade on update cascade,
 	MaNV int FOREIGN KEY REFERENCES NhanVien(MaNV) on delete cascade on update cascade
 )
 
 Insert into HoaDon values 
-	('2020/12/14', 1, 1),
-	('2020/12/15', 2, 1),
-	('2020/12/16', 3, 1)
+	('2020/12/14', N'Live', 100000, 1, 1),
+	('2020/12/15', N'Live', 100000, 2, 1),
+	('2020/12/16', N'Live', 100000, 3, 1)
 
 -- ChiTietHoaDon
 Create table ChiTietHoaDon (

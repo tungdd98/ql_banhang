@@ -166,6 +166,7 @@ namespace ql_banhang.pages
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "EditNhaCungCap";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cập nhật thông tin nhà cung cấp";
             this.Load += new System.EventHandler(this.EditNhaCungCap_Load);
             this.ResumeLayout(false);

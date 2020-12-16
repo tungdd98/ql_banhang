@@ -17,6 +17,7 @@ namespace ql_banhang
         NhanVien nhanVien;
         KhachHang khachHang;
         SanPham sanPham;
+        static int total = 0;
         public OrderManager()
         {
             InitializeComponent();
@@ -30,14 +31,16 @@ namespace ql_banhang
         private void managerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AdminManager f = new AdminManager();
+            this.Hide();
             f.ShowDialog();
+            this.Show();
         }
 
         private void OrderManager_Load(object sender, EventArgs e)
         {
             nhanVien = (NhanVien)this.Tag;
             labelTenNV.Text = nhanVien.TenNV;
-            labelNgayLap.Text = DateTime.Now.ToString();
+            labelNgayLap.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void textBoxSoDienThoaiKH_KeyDown(object sender, KeyEventArgs e)
@@ -107,7 +110,7 @@ namespace ql_banhang
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            int soLuongMua = 0;
+            int quantity = 0;
             if (textBoxMaSP.Text == "" || textBoxSoLuongMua.Text == "")
             {
                 MessageBox.Show("Mã sản phẩm, số lượng mua không được để trống", "Thông báo");
@@ -116,7 +119,7 @@ namespace ql_banhang
 
             try
             {
-                soLuongMua = int.Parse(textBoxSoLuongMua.Text);
+                quantity = int.Parse(textBoxSoLuongMua.Text);
             }
             catch (Exception)
             {
@@ -124,13 +127,13 @@ namespace ql_banhang
                 return;
             }
             
-            if (soLuongMua > int.Parse(textBoxSoLuongCon.Text))
+            if (quantity > int.Parse(textBoxSoLuongCon.Text))
             {
                 MessageBox.Show("Số lượng mua vượt quá số lượng sản phẩm còn trong kho", "Thông báo");
                 return;
             }
 
-            int price = (int)(int.Parse(textBoxDonGia.Text) - (int.Parse(textBoxDonGia.Text) * float.Parse(textBoxKhuyenMai.Text)));
+            int price = (int)(int.Parse(textBoxDonGia.Text) - (int.Parse(textBoxDonGia.Text) * float.Parse(textBoxKhuyenMai.Text) / 100));
             bool isCheckExist = false;
 
             if (dataGridViewSP.Rows.Count > 1)
@@ -140,11 +143,12 @@ namespace ql_banhang
                     DataGridViewRow r = dataGridViewSP.Rows[i];
                     if (r.Cells[0].Value.ToString().Equals(textBoxMaSP.Text))
                     {
-                        r.Cells[2].Value = (int.Parse(r.Cells[2].Value.ToString()) + soLuongMua);
+                        r.Cells[2].Value = (int.Parse(r.Cells[2].Value.ToString()) + quantity);
                         r.Cells[5].Value = (int.Parse(r.Cells[2].Value.ToString()) * price).ToString("N0");
 
-                        textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - soLuongMua).ToString();
+                        textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - quantity).ToString();
                         isCheckExist = true;
+                        SetTotalMoney();
                         break;
                     }
                 }
@@ -159,14 +163,15 @@ namespace ql_banhang
             row.Cells[0].Value = textBoxMaSP.Text;
             row.Cells[1].Value = textBoxTenSP.Text;
             row.Cells[2].Value = textBoxSoLuongMua.Text;
-            row.Cells[3].Value = int.Parse(textBoxDonGia.Text).ToString("N0");
-            row.Cells[4].Value = textBoxKhuyenMai.Text;
-            row.Cells[5].Value = (soLuongMua * price).ToString("N0");
+            row.Cells[3].Value = textBoxDonGia.Text;
+            row.Cells[4].Value = (float.Parse(textBoxKhuyenMai.Text) * int.Parse(textBoxDonGia.Text) / 100).ToString("N0");
+            row.Cells[5].Value = (quantity * price).ToString("N0");
             row.Cells[6].Value = "Cập nhật";
             row.Cells[7].Value = "Xoá";
 
             dataGridViewSP.Rows.Add(row);
-            textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - soLuongMua).ToString();
+            textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - quantity).ToString();
+            SetTotalMoney();
         }
 
         private void dataGridViewSP_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -177,7 +182,25 @@ namespace ql_banhang
 
                 if (confirmMsg == DialogResult.Yes)
                 {
+                    SetTotalMoney();
                     dataGridViewSP.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+
+            if (e.ColumnIndex == 6)
+            {
+                int soLuongMua = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
+
+                if (soLuongMua > sanPham.SoLuong)
+                {
+                    MessageBox.Show("Số lượng mua vượt quá số lượng sản phẩm còn trong kho", "Thông báo");
+                } else
+                {
+                    int quantity = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
+                    int price = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[3].Value.ToString());
+                    dataGridViewSP.Rows[e.RowIndex].Cells[5].Value = (quantity * price).ToString("N0");
+                    SetTotalMoney();
+                    textBoxSoLuongCon.Text = (sanPham.SoLuong - soLuongMua).ToString();
                 }
             }
         }
@@ -200,6 +223,8 @@ namespace ql_banhang
             hoaDon.NgayLap = DateTime.Now;
             hoaDon.MaNV = nhanVien.MaNV;
             hoaDon.MaKH = khachHang.MaKH;
+            hoaDon.GhiChu = textBoxNote.Text;
+            hoaDon.TongTien = total;
 
             db.HoaDons.InsertOnSubmit(hoaDon);
             db.SubmitChanges();
@@ -230,14 +255,34 @@ namespace ql_banhang
         {
             dataGridViewSP.Rows.Clear();
             buttonSaveOrder.Enabled = true;
+
             textBoxSoDienThoaiKH.Clear();
+            textBoxTenKH.Clear();
+            textBoxNote.Clear();
+
             textBoxMaSP.Clear();
             textBoxSoLuongMua.Clear();
-            textBoxTenKH.Clear();
             textBoxTenSP.Clear();
             textBoxDonGia.Clear();
             textBoxSoLuongCon.Clear();
             textBoxKhuyenMai.Clear();
+
+            total = 0;
+            labelTotal.Text = total.ToString("N0");
+        }
+        
+        private void SetTotalMoney()
+        {
+            total = 0;
+            for (int i = 0; i < dataGridViewSP.Rows.Count - 1; i++)
+            {
+                DataGridViewRow row = dataGridViewSP.Rows[i];
+                int quantity = int.Parse(row.Cells[2].Value.ToString());
+                int price = int.Parse(row.Cells[3].Value.ToString());
+
+                total += quantity * price;
+            }
+            labelTotal.Text = total.ToString("N0");
         }
     }
 }

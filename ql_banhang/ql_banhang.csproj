@@ -114,6 +114,9 @@
     <EmbeddedResource Include="pages\OrderManager.resx">
       <DependentUpon>OrderManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
