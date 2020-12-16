@@ -13,6 +13,7 @@ namespace ql_banhang.pages
     public partial class AdminManager : Form
     {
         QLBanHangDataContext db = new QLBanHangDataContext();
+        int tabIndex = 0;
         public AdminManager()
         {
             InitializeComponent();
@@ -24,12 +25,12 @@ namespace ql_banhang.pages
 
         private void AdminManager_Activated(object sender, EventArgs e)
         {
-            ShowLoaiSP();
+            selectedTab(tabIndex);
         }
 
-        private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        public void selectedTab(int tabIndex)
         {
-            switch (e.TabPageIndex)
+            switch (tabIndex)
             {
                 case 0:
                     ShowLoaiSP();
@@ -39,9 +40,14 @@ namespace ql_banhang.pages
                     ShowComboboxLoaiSP();
                     break;
                 default:
-
+                    ShowLoaiSP();
                     break;
             }
+        }
+
+        private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            selectedTab(e.TabPageIndex);
         }
 
         /*
@@ -53,7 +59,7 @@ namespace ql_banhang.pages
             dataGridViewLoaiSP.Rows.Clear();
             var list = from item in db.LoaiSanPhams
                        orderby item.MaLSP descending
-                       select item;
+                       select new { item.MaLSP, item.TenLSP };
 
             foreach (var item in list)
             {
@@ -110,6 +116,7 @@ namespace ql_banhang.pages
             {
                 EditLoaiSP f = new EditLoaiSP();
                 f.Tag = id;
+                tabIndex = 0;
                 f.ShowDialog();
             }
         }
@@ -173,7 +180,7 @@ namespace ql_banhang.pages
             SanPham
             @author: Dang Duc Tung
          */
-        public void ShowSanPham()
+        private void ShowSanPham()
         {
             dataGridViewSanPham.Rows.Clear();
             var list = from item in db.SanPhams
@@ -202,7 +209,7 @@ namespace ql_banhang.pages
         {
             var list = from item in db.LoaiSanPhams
                        orderby item.MaLSP descending
-                       select item;
+                       select new { item.MaLSP, item.TenLSP };
 
             comboBoxLoaiSP.DataSource = list;
             comboBoxLoaiSP.DisplayMember = "TenLSP";
@@ -310,6 +317,7 @@ namespace ql_banhang.pages
             {
                 EditSanPham f = new EditSanPham();
                 f.Tag = id;
+                tabIndex = 1;
                 f.ShowDialog();
             }
         }

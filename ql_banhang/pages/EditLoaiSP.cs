@@ -44,7 +44,6 @@ namespace ql_banhang.pages
             }
 
             item.TenLSP = tenLSP;
-
             db.SubmitChanges();
             this.Close();
         }

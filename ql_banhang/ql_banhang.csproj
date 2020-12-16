@@ -86,8 +86,8 @@
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
     <Compile Include="QLBanHang.designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>QLBanHang.dbml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="pages\AdminManager.resx">
@@ -114,6 +114,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
