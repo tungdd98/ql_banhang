@@ -42,6 +42,10 @@ namespace ql_banhang.pages
                 case 2:
                     ShowNhaCungCap();
                     break;
+                case 6:
+                    ShowPhieuNhap();
+                    ShowComboboxNhaCungCap();
+                    break;
                 default:
                     ShowLoaiSP();
                     break;
@@ -519,6 +523,222 @@ namespace ql_banhang.pages
         {
             textBoxSearchNCC.Clear();
             SearchNhaCungCap();
+        }
+
+        /*
+            PhieuNhap
+            @author: Duong Van Duc
+         */
+        private void ShowComboboxNhaCungCap()
+        {
+            var list = from item in db.NhaCungCaps
+                       orderby item.MaNCC descending
+                       select new { item.MaNCC, item.TenNCC };
+
+            comboBoxNhaCC.DataSource = list;
+            comboBoxNhaCC.DisplayMember = "TenNCC";
+            comboBoxNhaCC.ValueMember = "MaNCC";
+        }
+
+        private void ShowPhieuNhap()
+        {
+            dataGridViewPN.Rows.Clear();
+            var list = from item in db.PhieuNhaps
+                       orderby item.MaPN descending
+                       select new { item.MaPN, item.NgayLap, item.NhaCungCap.TenNCC };
+
+            foreach (var item in list)
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridViewPN.Rows[0].Clone();
+
+                row.Cells[0].Value = item.MaPN;
+                row.Cells[1].Value = item.NgayLap;
+                row.Cells[2].Value = item.TenNCC;
+                row.Cells[3].Value = "Cập nhật";
+                row.Cells[4].Value = "Xoá";
+
+                dataGridViewPN.Rows.Add(row);
+            }
+        }
+
+        private void buttonThemCTPN_Click(object sender, EventArgs e)
+        {
+            if (textBoxMaSPPN.Text == "" || textBoxSoLuongNhap.Text == "" || textBoxDonGiaNhap.Text == "")
+            {
+                MessageBox.Show("Mã sản phẩm, số lượng nhập, đơn giá nhập không được để trống", "Thông báo");
+                return;
+            }
+
+            int soLuongNhap = 0, donGiaNhap = 0;
+
+            try
+            {
+                soLuongNhap = int.Parse(textBoxSoLuongNhap.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Số lượng nhập phải là số nguyên", "Thông báo");
+                return;
+            }
+
+            try
+            {
+                donGiaNhap = int.Parse(textBoxDonGiaNhap.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Đơn giá nhập phải là số nguyên", "Thông báo");
+                return;
+            }
+
+            bool isCheckExist = false;
+            if (dataGridViewCTPN.Rows.Count > 1)
+            {
+                for (int i = 0; i < dataGridViewCTPN.Rows.Count - 1; i++)
+                {
+                    DataGridViewRow r = dataGridViewCTPN.Rows[i];
+                    if (r.Cells[0].Value.ToString().Equals(textBoxMaSPPN.Text))
+                    {
+                        MessageBox.Show("Đã tồn tại sản phẩm trong danh sách", "Thông báo");
+                        isCheckExist = true;
+                        break;
+                    }
+                }
+            }
+            if (isCheckExist)
+            {
+                return;
+            }
+
+            DataGridViewRow row = (DataGridViewRow)dataGridViewCTPN.Rows[0].Clone();
+            row.Cells[0].Value = textBoxMaSPPN.Text;
+            row.Cells[1].Value = soLuongNhap;
+            row.Cells[2].Value = donGiaNhap;
+            row.Cells[3].Value = "Cập nhật";
+            row.Cells[4].Value = "Xoá";
+
+            dataGridViewCTPN.Rows.Add(row);
+        }
+
+        private void buttonLuuPN_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewCTPN.Rows.Count <= 1)
+            {
+                MessageBox.Show("Danh sách rỗng, vui lòng nhập thêm sản phẩm", "Thông báo");
+                return;
+            }
+
+            PhieuNhap phieuNhap = new PhieuNhap();
+            phieuNhap.NgayLap = dateTimePickerNgayNhap.Value;
+            phieuNhap.MaNCC = int.Parse(comboBoxNhaCC.SelectedValue.ToString());
+
+            db.PhieuNhaps.InsertOnSubmit(phieuNhap);
+            db.SubmitChanges();
+
+            for (int i = 0; i < dataGridViewCTPN.Rows.Count - 1; i++)
+            {
+                DataGridViewRow row = dataGridViewCTPN.Rows[i];
+
+                ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
+                ctpn.MaPN = phieuNhap.MaPN;
+                ctpn.MaSP = int.Parse(row.Cells[0].Value.ToString());
+                ctpn.DonGiaNhap = int.Parse(row.Cells[1].Value.ToString());
+                ctpn.SoLuongNhap = int.Parse(row.Cells[2].Value.ToString());
+
+                SanPham sanPham = new SanPham();
+                sanPham.SoLuong = sanPham.SoLuong + ctpn.SoLuongNhap;
+
+                db.ChiTietPhieuNhaps.InsertOnSubmit(ctpn);
+                db.SubmitChanges();
+
+                MessageBox.Show("Tạo phiếu nhập thành công", "Thông báo");
+                ShowPhieuNhap();
+                buttonLuuPN.Enabled = false;
+            }
+        }
+
+        private void textBoxMaSPPN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TimKiemThongTinSanPham();
+            }
+        }
+        private void TimKiemThongTinSanPham()
+        {
+            if (textBoxMaSPPN.Text == "")
+            {
+                return;
+            }
+            int maSP = int.Parse(textBoxMaSPPN.Text);
+            var sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == maSP);
+
+            if (sanPham != null)
+            {
+                textBoxTenSPPN.Text = sanPham.TenSP;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy thông tin sản phẩm phù hợp", "Thông báo");
+            }
+        }
+
+        private void textBoxMaSPPN_Leave(object sender, EventArgs e)
+        {
+            TimKiemThongTinSanPham();
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            textBoxTenSPPN.Clear();
+            textBoxDonGiaNhap.Clear();
+            textBoxSoLuongNhap.Clear();
+            textBoxTenSPPN.Clear();
+            textBoxMaSPPN.Clear();
+        }
+
+        private void buttonTaoMoiPN_Click(object sender, EventArgs e)
+        {
+            buttonLuuPN.Enabled = true;
+            dateTimePickerNgayNhap.Value = DateTime.Now;
+            comboBoxNhaCC.SelectedIndex = 0;
+            dataGridViewCTPN.Rows.Clear();
+            textBoxMaSPPN.Clear();
+            textBoxTenSPPN.Clear();
+            textBoxDonGiaNhap.Clear();
+            textBoxSoLuongNhap.Clear();
+            textBoxTenSPPN.Clear();
+        }
+
+        private void dataGridViewCTPN_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                var confirmMsg = MessageBox.Show("Bạn có muốn xoá?", "Thông báo", MessageBoxButtons.YesNo);
+
+                if (confirmMsg == DialogResult.Yes)
+                {
+                    dataGridViewCTPN.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+        }
+
+        private void dataGridViewPN_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = int.Parse(dataGridViewPN.Rows[e.RowIndex].Cells[0].Value.ToString());
+            PhieuNhap itemChange = db.PhieuNhaps.SingleOrDefault(item => item.MaPN == id);
+
+            if (e.ColumnIndex == 4)
+            {
+                var confirmMsg = MessageBox.Show("Bạn có muốn xoá?", "Thông báo", MessageBoxButtons.YesNo);
+
+                if (confirmMsg == DialogResult.Yes)
+                {
+                    db.PhieuNhaps.DeleteOnSubmit(itemChange);
+                    db.SubmitChanges();
+                    ShowPhieuNhap();
+                }
+            }
         }
     }
 }

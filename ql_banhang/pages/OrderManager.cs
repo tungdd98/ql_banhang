@@ -107,13 +107,24 @@ namespace ql_banhang
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            int soLuongMua = 0;
             if (textBoxMaSP.Text == "" || textBoxSoLuongMua.Text == "")
             {
                 MessageBox.Show("Mã sản phẩm, số lượng mua không được để trống", "Thông báo");
                 return;
             }
 
-            if (int.Parse(textBoxSoLuongMua.Text) > int.Parse(textBoxSoLuongCon.Text))
+            try
+            {
+                soLuongMua = int.Parse(textBoxSoLuongMua.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Số lượng mua phải là số nguyên", "Thông báo");
+                return;
+            }
+            
+            if (soLuongMua > int.Parse(textBoxSoLuongCon.Text))
             {
                 MessageBox.Show("Số lượng mua vượt quá số lượng sản phẩm còn trong kho", "Thông báo");
                 return;
@@ -129,10 +140,10 @@ namespace ql_banhang
                     DataGridViewRow r = dataGridViewSP.Rows[i];
                     if (r.Cells[0].Value.ToString().Equals(textBoxMaSP.Text))
                     {
-                        r.Cells[2].Value = (int.Parse(r.Cells[2].Value.ToString()) + int.Parse(textBoxSoLuongMua.Text));
+                        r.Cells[2].Value = (int.Parse(r.Cells[2].Value.ToString()) + soLuongMua);
                         r.Cells[5].Value = (int.Parse(r.Cells[2].Value.ToString()) * price).ToString("N0");
 
-                        textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - int.Parse(textBoxSoLuongMua.Text)).ToString();
+                        textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - soLuongMua).ToString();
                         isCheckExist = true;
                         break;
                     }
@@ -150,12 +161,12 @@ namespace ql_banhang
             row.Cells[2].Value = textBoxSoLuongMua.Text;
             row.Cells[3].Value = int.Parse(textBoxDonGia.Text).ToString("N0");
             row.Cells[4].Value = textBoxKhuyenMai.Text;
-            row.Cells[5].Value = (int.Parse(textBoxSoLuongMua.Text) * price).ToString("N0");
+            row.Cells[5].Value = (soLuongMua * price).ToString("N0");
             row.Cells[6].Value = "Cập nhật";
             row.Cells[7].Value = "Xoá";
 
             dataGridViewSP.Rows.Add(row);
-            textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - int.Parse(textBoxSoLuongMua.Text)).ToString();
+            textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) - soLuongMua).ToString();
         }
 
         private void dataGridViewSP_CellContentClick(object sender, DataGridViewCellEventArgs e)

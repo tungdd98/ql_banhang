@@ -36,6 +36,14 @@ namespace ql_banhang
             this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewSP = new System.Windows.Forms.DataGridView();
+            this.masp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.soLuongMua = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.labelNgayLap = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelTenNV = new System.Windows.Forms.Label();
@@ -60,14 +68,6 @@ namespace ql_banhang
             this.textBoxMaSP = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonSaveOrder = new System.Windows.Forms.Button();
-            this.masp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.soLuongMua = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.buttonNewOrder = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -141,6 +141,57 @@ namespace ql_banhang
             this.dataGridViewSP.Size = new System.Drawing.Size(837, 449);
             this.dataGridViewSP.TabIndex = 0;
             this.dataGridViewSP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSP_CellContentClick);
+            // 
+            // masp
+            // 
+            this.masp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.masp.FillWeight = 92.59259F;
+            this.masp.HeaderText = "Mã SP";
+            this.masp.Name = "masp";
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.FillWeight = 92.59259F;
+            this.Column1.HeaderText = "Tên SP";
+            this.Column1.Name = "Column1";
+            // 
+            // soLuongMua
+            // 
+            this.soLuongMua.FillWeight = 92.59259F;
+            this.soLuongMua.HeaderText = "Số lượng";
+            this.soLuongMua.Name = "soLuongMua";
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.FillWeight = 92.59259F;
+            this.Column3.HeaderText = "Đơn giá";
+            this.Column3.Name = "Column3";
+            // 
+            // Column8
+            // 
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column8.HeaderText = "Giảm giá";
+            this.Column8.Name = "Column8";
+            // 
+            // thanhTien
+            // 
+            this.thanhTien.FillWeight = 129.6296F;
+            this.thanhTien.HeaderText = "Thành tiền";
+            this.thanhTien.Name = "thanhTien";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 85;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "";
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 85;
             // 
             // labelNgayLap
             // 
@@ -397,57 +448,6 @@ namespace ql_banhang
             this.buttonSaveOrder.Text = "Lưu hoá đơn";
             this.buttonSaveOrder.UseVisualStyleBackColor = true;
             this.buttonSaveOrder.Click += new System.EventHandler(this.buttonSaveOrder_Click);
-            // 
-            // masp
-            // 
-            this.masp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.masp.FillWeight = 92.59259F;
-            this.masp.HeaderText = "Mã SP";
-            this.masp.Name = "masp";
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.FillWeight = 92.59259F;
-            this.Column1.HeaderText = "Tên SP";
-            this.Column1.Name = "Column1";
-            // 
-            // soLuongMua
-            // 
-            this.soLuongMua.FillWeight = 92.59259F;
-            this.soLuongMua.HeaderText = "Số lượng";
-            this.soLuongMua.Name = "soLuongMua";
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.FillWeight = 92.59259F;
-            this.Column3.HeaderText = "Đơn giá";
-            this.Column3.Name = "Column3";
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column8.HeaderText = "Giảm giá";
-            this.Column8.Name = "Column8";
-            // 
-            // thanhTien
-            // 
-            this.thanhTien.FillWeight = 129.6296F;
-            this.thanhTien.HeaderText = "Thành tiền";
-            this.thanhTien.Name = "thanhTien";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 85;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 85;
             // 
             // buttonNewOrder
             // 
