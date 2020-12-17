@@ -56,5 +56,13 @@ namespace ql_banhang
                 MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu");
             }
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register f = new Register();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }

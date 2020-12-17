@@ -53,6 +53,8 @@ namespace ql_banhang
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxTenKH = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxNote = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBoxKhuyenMai = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -69,8 +71,6 @@ namespace ql_banhang
             this.label5 = new System.Windows.Forms.Label();
             this.buttonSaveOrder = new System.Windows.Forms.Button();
             this.buttonNewOrder = new System.Windows.Forms.Button();
-            this.textBoxNote = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelTotal = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -95,8 +95,8 @@ namespace ql_banhang
             // managerToolStripMenuItem
             // 
             this.managerToolStripMenuItem.Name = "managerToolStripMenuItem";
-            this.managerToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.managerToolStripMenuItem.Text = "Manager";
+            this.managerToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.managerToolStripMenuItem.Text = "Quản lý ";
             this.managerToolStripMenuItem.Click += new System.EventHandler(this.managerToolStripMenuItem_Click);
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
@@ -145,6 +145,7 @@ namespace ql_banhang
             this.dataGridViewSP.Name = "dataGridViewSP";
             this.dataGridViewSP.Size = new System.Drawing.Size(837, 449);
             this.dataGridViewSP.TabIndex = 0;
+            this.dataGridViewSP.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSP_CellClick);
             this.dataGridViewSP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSP_CellContentClick);
             // 
             // masp
@@ -262,6 +263,7 @@ namespace ql_banhang
             this.textBoxSoDienThoaiKH.Name = "textBoxSoDienThoaiKH";
             this.textBoxSoDienThoaiKH.Size = new System.Drawing.Size(163, 25);
             this.textBoxSoDienThoaiKH.TabIndex = 6;
+            this.textBoxSoDienThoaiKH.Text = "0973793711";
             this.textBoxSoDienThoaiKH.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSoDienThoaiKH_KeyDown);
             this.textBoxSoDienThoaiKH.Leave += new System.EventHandler(this.textBoxSoDienThoaiKH_Leave);
             // 
@@ -303,6 +305,24 @@ namespace ql_banhang
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin hoá đơn";
+            // 
+            // textBoxNote
+            // 
+            this.textBoxNote.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNote.Location = new System.Drawing.Point(177, 145);
+            this.textBoxNote.Name = "textBoxNote";
+            this.textBoxNote.Size = new System.Drawing.Size(163, 25);
+            this.textBoxNote.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(13, 148);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Ghi chú: ";
             // 
             // groupBox2
             // 
@@ -473,24 +493,6 @@ namespace ql_banhang
             this.buttonNewOrder.Text = "Tạo mới hoá đơn";
             this.buttonNewOrder.UseVisualStyleBackColor = true;
             this.buttonNewOrder.Click += new System.EventHandler(this.buttonNewOrder_Click);
-            // 
-            // textBoxNote
-            // 
-            this.textBoxNote.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNote.Location = new System.Drawing.Point(177, 145);
-            this.textBoxNote.Name = "textBoxNote";
-            this.textBoxNote.Size = new System.Drawing.Size(163, 25);
-            this.textBoxNote.TabIndex = 10;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 148);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Ghi chú: ";
             // 
             // groupBox3
             // 

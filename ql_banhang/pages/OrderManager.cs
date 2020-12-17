@@ -164,8 +164,8 @@ namespace ql_banhang
             row.Cells[1].Value = textBoxTenSP.Text;
             row.Cells[2].Value = textBoxSoLuongMua.Text;
             row.Cells[3].Value = textBoxDonGia.Text;
-            row.Cells[4].Value = (float.Parse(textBoxKhuyenMai.Text) * int.Parse(textBoxDonGia.Text) / 100).ToString("N0");
-            row.Cells[5].Value = (quantity * price).ToString("N0");
+            row.Cells[4].Value = (float.Parse(textBoxKhuyenMai.Text) * int.Parse(textBoxDonGia.Text) / 100).ToString();
+            row.Cells[5].Value = (quantity * price).ToString();
             row.Cells[6].Value = "Cập nhật";
             row.Cells[7].Value = "Xoá";
 
@@ -182,25 +182,45 @@ namespace ql_banhang
 
                 if (confirmMsg == DialogResult.Yes)
                 {
-                    SetTotalMoney();
-                    dataGridViewSP.Rows.RemoveAt(e.RowIndex);
+                    try
+                    {
+                        int soLuongMua = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
+                        SetTotalMoney();
+                        dataGridViewSP.Rows.RemoveAt(e.RowIndex);
+                        textBoxSoLuongCon.Text = (int.Parse(textBoxSoLuongCon.Text) + soLuongMua).ToString();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Số lượng mua phải là số nguyên", "Thông báo");
+                        return;
+                    }
                 }
             }
 
             if (e.ColumnIndex == 6)
             {
-                int soLuongMua = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
+                try
+                {
+                    int soLuongMua = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
 
-                if (soLuongMua > sanPham.SoLuong)
+                    if (soLuongMua > sanPham.SoLuong)
+                    {
+                        MessageBox.Show("Số lượng mua vượt quá số lượng sản phẩm còn trong kho", "Thông báo");
+                    }
+                    else
+                    {
+                        int quantity = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
+                        int price = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[3].Value.ToString());
+                        dataGridViewSP.Rows[e.RowIndex].Cells[5].Value = (quantity * price).ToString("N0");
+                        SetTotalMoney();
+                        textBoxSoLuongCon.Text = (sanPham.SoLuong - soLuongMua).ToString();
+                        MessageBox.Show("Cập nhật thành công", "Thông báo");
+                    }
+                }
+                catch (Exception)
                 {
-                    MessageBox.Show("Số lượng mua vượt quá số lượng sản phẩm còn trong kho", "Thông báo");
-                } else
-                {
-                    int quantity = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
-                    int price = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[3].Value.ToString());
-                    dataGridViewSP.Rows[e.RowIndex].Cells[5].Value = (quantity * price).ToString("N0");
-                    SetTotalMoney();
-                    textBoxSoLuongCon.Text = (sanPham.SoLuong - soLuongMua).ToString();
+                    MessageBox.Show("Số lượng mua phải là số nguyên", "Thông báo");
+                    return;
                 }
             }
         }
@@ -226,6 +246,8 @@ namespace ql_banhang
             hoaDon.GhiChu = textBoxNote.Text;
             hoaDon.TongTien = total;
 
+            khachHang.DiemTichLuy = (int)Math.Round((double)(total / 100000), 2, MidpointRounding.ToEven);
+
             db.HoaDons.InsertOnSubmit(hoaDon);
             db.SubmitChanges();
 
@@ -244,8 +266,6 @@ namespace ql_banhang
                 db.ChiTietHoaDons.InsertOnSubmit(cthd);
                 db.SubmitChanges();
             }
-
-            
 
             MessageBox.Show("Tạo hoá đơn thành công", "Thông báo");
             buttonSaveOrder.Enabled = false;
@@ -277,12 +297,27 @@ namespace ql_banhang
             for (int i = 0; i < dataGridViewSP.Rows.Count - 1; i++)
             {
                 DataGridViewRow row = dataGridViewSP.Rows[i];
-                int quantity = int.Parse(row.Cells[2].Value.ToString());
-                int price = int.Parse(row.Cells[3].Value.ToString());
+                int price = int.Parse(row.Cells[5].Value.ToString());
 
-                total += quantity * price;
+                total += price;
             }
             labelTotal.Text = total.ToString("N0");
+        }
+
+        private void dataGridViewSP_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != dataGridViewSP.Rows.Count - 1)
+            {
+                int id = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[0].Value.ToString());
+                int quantity = int.Parse(dataGridViewSP.Rows[e.RowIndex].Cells[2].Value.ToString());
+
+                SanPham spChoose = db.SanPhams.SingleOrDefault(sp => sp.MaSP == id);
+
+                textBoxMaSP.Text = spChoose.MaSP.ToString();
+                textBoxTenSP.Text = spChoose.TenSP;
+                textBoxDonGia.Text = spChoose.DonGia.ToString();
+                textBoxSoLuongCon.Text = (spChoose.SoLuong - quantity).ToString();
+            }
         }
     }
 }
