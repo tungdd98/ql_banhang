@@ -139,4 +139,4 @@ Insert into ChiTietHoaDon values
 	(1, 2, 5),
 	(1, 3, 6)
 
-Select * from NhaCungCap
+Select * from HoaDon
