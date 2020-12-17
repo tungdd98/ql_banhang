@@ -42,9 +42,18 @@ namespace ql_banhang.pages
                 case 2:
                     ShowNhaCungCap();
                     break;
+                case 3:
+                    ShowCustomer();
+                    break;
+                case 4:
+                    HienThiNhanVien();
+                    break;
                 case 6:
                     ShowPhieuNhap();
                     ShowComboboxNhaCungCap();
+                    break;
+                case 7:
+                    ShowOrder();
                     break;
                 default:
                     ShowLoaiSP();
@@ -211,6 +220,7 @@ namespace ql_banhang.pages
                 dataGridViewSanPham.Rows.Add(row);
             }
         }
+
         private void ShowComboboxLoaiSP()
         {
             var list = from item in db.LoaiSanPhams
@@ -221,6 +231,7 @@ namespace ql_banhang.pages
             comboBoxLoaiSP.DisplayMember = "TenLSP";
             comboBoxLoaiSP.ValueMember = "MaLSP";
         }
+
         private void buttonAddSP_Click(object sender, EventArgs e)
         {
             int donGia, soLuong, maLSP;
@@ -661,6 +672,7 @@ namespace ql_banhang.pages
                 TimKiemThongTinSanPham();
             }
         }
+
         private void TimKiemThongTinSanPham()
         {
             if (textBoxMaSPPN.Text == "")
@@ -755,6 +767,211 @@ namespace ql_banhang.pages
                 f.Tag = id;
                 f.ShowDialog();
             }
+        }
+
+        /*
+            DonHang
+            @author: Dang Duc Tung
+         */
+        private void ShowOrder()
+        {
+            dataGridViewOrder.Rows.Clear();
+            var list = from item in db.HoaDons
+                       orderby item.MaHD descending
+                       select new { item.MaHD, item.NgayLap, item.KhachHang.TenKH, item.NhanVien.TenNV, item.GhiChu };
+
+            foreach (var item in list)
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridViewOrder.Rows[0].Clone();
+
+                row.Cells[0].Value = item.MaHD;
+                row.Cells[1].Value = item.NgayLap;
+                row.Cells[2].Value = item.TenKH;
+                row.Cells[3].Value = item.TenNV;
+                row.Cells[4].Value = item.GhiChu;
+                row.Cells[5].Value = "Xem chi tiết";
+
+                dataGridViewOrder.Rows.Add(row);
+            }
+        }
+
+        private void dataGridViewOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = int.Parse(dataGridViewOrder.Rows[e.RowIndex].Cells[0].Value.ToString());
+            if (e.ColumnIndex == 5)
+            {
+                ViewOrder f = new ViewOrder();
+                f.Tag = id;
+                f.ShowDialog();
+            }
+        }
+        
+        /*
+            KhachHang
+            @author
+         */
+        private void ShowCustomer()
+        {
+            dataGridViewKH.Rows.Clear();
+            var list = from item in db.KhachHangs
+                       orderby item.MaKH descending
+                       select new { item.MaKH, item.TenKH, item.SoDienThoai, item.DiemTichLuy };
+
+            foreach (var item in list)
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridViewKH.Rows[0].Clone();
+
+                row.Cells[0].Value = item.MaKH;
+                row.Cells[1].Value = item.TenKH;
+                row.Cells[2].Value = item.SoDienThoai;
+                row.Cells[3].Value = item.DiemTichLuy;
+                row.Cells[4].Value = "Cập nhật";
+                row.Cells[5].Value = "Xoá";
+
+                dataGridViewKH.Rows.Add(row);
+            }
+        }
+
+        private void buttonAddKH_Click(object sender, EventArgs e)
+        {
+            if (textBoxTenKH.Text == "" || textBoxSoDienThoaiKH.Text == "")
+            {
+                MessageBox.Show("Tên khách hàng, số điện thoại khách hàng không được để trống", "Thông báo");
+                return;
+            }
+
+            KhachHang item = new KhachHang();
+            item.TenKH = textBoxTenKH.Text;
+            item.SoDienThoai = textBoxSoDienThoaiKH.Text;
+
+            db.KhachHangs.InsertOnSubmit(item);
+            db.SubmitChanges();
+            ShowCustomer();
+        }
+
+        private void buttonClearFormKH_Click(object sender, EventArgs e)
+        {
+            textBoxTenKH.Clear();
+            textBoxSoDienThoaiKH.Clear();
+        }
+
+        private void SearchCustomer()
+        {
+            dataGridViewKH.Rows.Clear();
+            string search = textBoxSearchKH.Text;
+
+            if (search == "")
+            {
+                ShowCustomer();
+                return;
+            }
+
+            var listSearch = from item in db.KhachHangs
+                             where item.TenKH.Contains(search) || item.SoDienThoai.Contains(search)
+                             orderby item.MaKH descending
+                             select new { item.MaKH, item.TenKH, item.SoDienThoai, item.DiemTichLuy };
+
+            if (listSearch.Count() == 0)
+            {
+                MessageBox.Show("Không tìm thấy khách hàng với từ khoá " + search);
+            }
+            else
+            {
+                foreach (var item in listSearch)
+                {
+                    DataGridViewRow row = (DataGridViewRow)dataGridViewKH.Rows[0].Clone();
+
+                    row.Cells[0].Value = item.MaKH;
+                    row.Cells[1].Value = item.TenKH;
+                    row.Cells[2].Value = item.SoDienThoai;
+                    row.Cells[3].Value = item.DiemTichLuy;
+                    row.Cells[4].Value = "Cập nhật";
+                    row.Cells[5].Value = "Xoá";
+
+                    dataGridViewKH.Rows.Add(row);
+                }
+            }
+        }
+
+        private void textBoxSearchKH_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchCustomer();
+            }
+        }
+
+        private void textBoxSearchKH_Leave(object sender, EventArgs e)
+        {
+            SearchCustomer();
+        }
+
+        private void buttonSearchKH_Click(object sender, EventArgs e)
+        {
+            SearchCustomer();
+        }
+
+        private void buttonClearSearchKH_Click(object sender, EventArgs e)
+        {
+            textBoxSearchKH.Clear();
+            ShowCustomer();
+        }
+
+        private void dataGridViewKH_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = int.Parse(dataGridViewKH.Rows[e.RowIndex].Cells[0].Value.ToString());
+            KhachHang itemChange = db.KhachHangs.SingleOrDefault(item => item.MaKH == id);
+
+            if (e.ColumnIndex == 5)
+            {
+                var confirmMsg = MessageBox.Show("Bạn có muốn xoá?", "Thông báo", MessageBoxButtons.YesNo);
+
+                if (confirmMsg == DialogResult.Yes)
+                {
+                    db.KhachHangs.DeleteOnSubmit(itemChange);
+                    db.SubmitChanges();
+                    ShowCustomer();
+                }
+            }
+
+            if (e.ColumnIndex == 4)
+            {
+                
+            }
+        }
+
+        /*
+         * NhanVien
+         * @author
+         */
+
+        private void HienThiNhanVien()
+        {
+            dataGridViewNhanVien.Rows.Clear();
+            var list = from item in db.NhanViens
+                       orderby item.MaNV descending
+                       select new { item.MaNV, item.Username, item.TenNV, item.SoDienThoai, item.NgaySinh, item.QueQuan, item.ChucVu };
+
+            foreach (var item in list)
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridViewNhanVien.Rows[0].Clone();
+
+                row.Cells[0].Value = item.MaNV;
+                row.Cells[1].Value = item.TenNV;
+                row.Cells[2].Value = item.Username;
+                row.Cells[3].Value = item.SoDienThoai;
+                row.Cells[4].Value = item.NgaySinh;
+                row.Cells[5].Value = item.QueQuan;
+                row.Cells[6].Value = item.ChucVu == 1 ? "Quản lý" : "Nhân viên";
+                row.Cells[7].Value = "Cập nhật";
+                row.Cells[8].Value = "Xoá";
+
+                dataGridViewNhanVien.Rows.Add(row);
+            }
+        }
+        private void dataGridViewNhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
