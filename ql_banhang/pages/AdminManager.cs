@@ -201,7 +201,7 @@ namespace ql_banhang.pages
                 row.Cells[0].Value = item.MaSP;
                 row.Cells[1].Value = item.TenSP;
                 row.Cells[2].Value = item.TenLSP;
-                row.Cells[3].Value = item.DonGia;
+                row.Cells[3].Value = item.DonGia.ToString();
                 row.Cells[4].Value = item.KhuyenMai;
                 row.Cells[5].Value = item.SoLuong;
 
@@ -211,7 +211,6 @@ namespace ql_banhang.pages
                 dataGridViewSanPham.Rows.Add(row);
             }
         }
-
         private void ShowComboboxLoaiSP()
         {
             var list = from item in db.LoaiSanPhams
@@ -222,7 +221,6 @@ namespace ql_banhang.pages
             comboBoxLoaiSP.DisplayMember = "TenLSP";
             comboBoxLoaiSP.ValueMember = "MaLSP";
         }
-
         private void buttonAddSP_Click(object sender, EventArgs e)
         {
             int donGia, soLuong, maLSP;
@@ -612,10 +610,9 @@ namespace ql_banhang.pages
 
             DataGridViewRow row = (DataGridViewRow)dataGridViewCTPN.Rows[0].Clone();
             row.Cells[0].Value = textBoxMaSPPN.Text;
-            row.Cells[1].Value = soLuongNhap;
-            row.Cells[2].Value = donGiaNhap;
-            row.Cells[3].Value = "Cập nhật";
-            row.Cells[4].Value = "Xoá";
+            row.Cells[1].Value = donGiaNhap;
+            row.Cells[2].Value = soLuongNhap;
+            row.Cells[3].Value = "Xoá";
 
             dataGridViewCTPN.Rows.Add(row);
         }
@@ -645,16 +642,16 @@ namespace ql_banhang.pages
                 ctpn.DonGiaNhap = int.Parse(row.Cells[1].Value.ToString());
                 ctpn.SoLuongNhap = int.Parse(row.Cells[2].Value.ToString());
 
-                SanPham sanPham = new SanPham();
+                SanPham sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == ctpn.MaSP); 
                 sanPham.SoLuong = sanPham.SoLuong + ctpn.SoLuongNhap;
 
                 db.ChiTietPhieuNhaps.InsertOnSubmit(ctpn);
                 db.SubmitChanges();
-
-                MessageBox.Show("Tạo phiếu nhập thành công", "Thông báo");
-                ShowPhieuNhap();
-                buttonLuuPN.Enabled = false;
             }
+
+            MessageBox.Show("Tạo phiếu nhập thành công", "Thông báo");
+            ShowPhieuNhap();
+            buttonLuuPN.Enabled = false;
         }
 
         private void textBoxMaSPPN_KeyDown(object sender, KeyEventArgs e)
@@ -734,10 +731,29 @@ namespace ql_banhang.pages
 
                 if (confirmMsg == DialogResult.Yes)
                 {
+                    // Lấy danh sách chi tiết phiếu nhập
+                    var listCTPN = from ct in db.ChiTietPhieuNhaps
+                                   where ct.MaPN == id
+                                   select new { ct.MaSP, ct.SoLuongNhap };
+
+                    // Giảm số lượng sản phẩm tương ứng
+                    foreach(var ct in listCTPN)
+                    {
+                        SanPham sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == ct.MaSP);
+                        sanPham.SoLuong = sanPham.SoLuong - ct.SoLuongNhap;
+                        db.SubmitChanges();
+                    }
                     db.PhieuNhaps.DeleteOnSubmit(itemChange);
                     db.SubmitChanges();
                     ShowPhieuNhap();
                 }
+            }
+
+            if (e.ColumnIndex == 3)
+            {
+                EditPhieuNhap f = new EditPhieuNhap();
+                f.Tag = id;
+                f.ShowDialog();
             }
         }
     }

@@ -65,6 +65,12 @@
     <Compile Include="pages\EditNhaCungCap.Designer.cs">
       <DependentUpon>EditNhaCungCap.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\EditPhieuNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pages\EditPhieuNhap.Designer.cs">
+      <DependentUpon>EditPhieuNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\EditSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EditNhaCungCap.resx">
       <DependentUpon>EditNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EditPhieuNhap.resx">
+      <DependentUpon>EditPhieuNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EditSanPham.resx">
       <DependentUpon>EditSanPham.cs</DependentUpon>
