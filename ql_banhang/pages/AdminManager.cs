@@ -49,11 +49,13 @@ namespace ql_banhang.pages
                     HienThiNhanVien();
                     break;
                 case 6:
-                    ShowPhieuNhap();
-                    ShowComboboxNhaCungCap();
+                    ShowOrder();
                     break;
                 case 7:
-                    ShowOrder();
+                    HienThiPhieuDatHang();
+                    break;
+                case 8:
+                    HienThiPhieuNhapHang();
                     break;
                 default:
                     ShowLoaiSP();
@@ -538,232 +540,77 @@ namespace ql_banhang.pages
             PhieuNhap
             @author: Duong Van Duc
          */
-        private void ShowComboboxNhaCungCap()
-        {
-            var list = from item in db.NhaCungCaps
-                       orderby item.MaNCC descending
-                       select new { item.MaNCC, item.TenNCC };
 
-            comboBoxNhaCC.DataSource = list;
-            comboBoxNhaCC.DisplayMember = "TenNCC";
-            comboBoxNhaCC.ValueMember = "MaNCC";
+        private void btnPNH_Them_Click(object sender, EventArgs e)
+        {
+            CreatePhieuNhapHang f = new CreatePhieuNhapHang();
+            f.ShowDialog();
         }
-
-        private void ShowPhieuNhap()
+        private void grPhieuNhapHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridViewPN.Rows.Clear();
-            var list = from item in db.PhieuNhaps
-                       orderby item.MaPN descending
-                       select new { item.MaPN, item.NgayLap, item.NhaCungCap.TenNCC };
-
-            foreach (var item in list)
-            {
-                DataGridViewRow row = (DataGridViewRow)dataGridViewPN.Rows[0].Clone();
-
-                row.Cells[0].Value = item.MaPN;
-                row.Cells[1].Value = item.NgayLap;
-                row.Cells[2].Value = item.TenNCC;
-                row.Cells[3].Value = "Cập nhật";
-                row.Cells[4].Value = "Xoá";
-
-                dataGridViewPN.Rows.Add(row);
-            }
-        }
-
-        private void buttonThemCTPN_Click(object sender, EventArgs e)
-        {
-            if (textBoxMaSPPN.Text == "" || textBoxSoLuongNhap.Text == "" || textBoxDonGiaNhap.Text == "")
-            {
-                MessageBox.Show("Mã sản phẩm, số lượng nhập, đơn giá nhập không được để trống", "Thông báo");
-                return;
-            }
-
-            int soLuongNhap = 0, donGiaNhap = 0;
-
-            try
-            {
-                soLuongNhap = int.Parse(textBoxSoLuongNhap.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Số lượng nhập phải là số nguyên", "Thông báo");
-                return;
-            }
-
-            try
-            {
-                donGiaNhap = int.Parse(textBoxDonGiaNhap.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Đơn giá nhập phải là số nguyên", "Thông báo");
-                return;
-            }
-
-            bool isCheckExist = false;
-            if (dataGridViewCTPN.Rows.Count > 1)
-            {
-                for (int i = 0; i < dataGridViewCTPN.Rows.Count - 1; i++)
-                {
-                    DataGridViewRow r = dataGridViewCTPN.Rows[i];
-                    if (r.Cells[0].Value.ToString().Equals(textBoxMaSPPN.Text))
-                    {
-                        MessageBox.Show("Đã tồn tại sản phẩm trong danh sách", "Thông báo");
-                        isCheckExist = true;
-                        break;
-                    }
-                }
-            }
-            if (isCheckExist)
-            {
-                return;
-            }
-
-            DataGridViewRow row = (DataGridViewRow)dataGridViewCTPN.Rows[0].Clone();
-            row.Cells[0].Value = textBoxMaSPPN.Text;
-            row.Cells[1].Value = donGiaNhap;
-            row.Cells[2].Value = soLuongNhap;
-            row.Cells[3].Value = "Xoá";
-
-            dataGridViewCTPN.Rows.Add(row);
-        }
-
-        private void buttonLuuPN_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewCTPN.Rows.Count <= 1)
-            {
-                MessageBox.Show("Danh sách rỗng, vui lòng nhập thêm sản phẩm", "Thông báo");
-                return;
-            }
-
-            PhieuNhap phieuNhap = new PhieuNhap();
-            phieuNhap.NgayLap = dateTimePickerNgayNhap.Value;
-            phieuNhap.MaNCC = int.Parse(comboBoxNhaCC.SelectedValue.ToString());
-
-            db.PhieuNhaps.InsertOnSubmit(phieuNhap);
-            db.SubmitChanges();
-
-            for (int i = 0; i < dataGridViewCTPN.Rows.Count - 1; i++)
-            {
-                DataGridViewRow row = dataGridViewCTPN.Rows[i];
-
-                ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
-                ctpn.MaPN = phieuNhap.MaPN;
-                ctpn.MaSP = int.Parse(row.Cells[0].Value.ToString());
-                ctpn.DonGiaNhap = int.Parse(row.Cells[1].Value.ToString());
-                ctpn.SoLuongNhap = int.Parse(row.Cells[2].Value.ToString());
-
-                SanPham sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == ctpn.MaSP); 
-                sanPham.SoLuong = sanPham.SoLuong + ctpn.SoLuongNhap;
-
-                db.ChiTietPhieuNhaps.InsertOnSubmit(ctpn);
-                db.SubmitChanges();
-            }
-
-            MessageBox.Show("Tạo phiếu nhập thành công", "Thông báo");
-            ShowPhieuNhap();
-            buttonLuuPN.Enabled = false;
-        }
-
-        private void textBoxMaSPPN_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                TimKiemThongTinSanPham();
-            }
-        }
-
-        private void TimKiemThongTinSanPham()
-        {
-            if (textBoxMaSPPN.Text == "")
-            {
-                return;
-            }
-            int maSP = int.Parse(textBoxMaSPPN.Text);
-            var sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == maSP);
-
-            if (sanPham != null)
-            {
-                textBoxTenSPPN.Text = sanPham.TenSP;
-            }
-            else
-            {
-                MessageBox.Show("Không tìm thấy thông tin sản phẩm phù hợp", "Thông báo");
-            }
-        }
-
-        private void textBoxMaSPPN_Leave(object sender, EventArgs e)
-        {
-            TimKiemThongTinSanPham();
-        }
-
-        private void buttonClear_Click(object sender, EventArgs e)
-        {
-            textBoxTenSPPN.Clear();
-            textBoxDonGiaNhap.Clear();
-            textBoxSoLuongNhap.Clear();
-            textBoxTenSPPN.Clear();
-            textBoxMaSPPN.Clear();
-        }
-
-        private void buttonTaoMoiPN_Click(object sender, EventArgs e)
-        {
-            buttonLuuPN.Enabled = true;
-            dateTimePickerNgayNhap.Value = DateTime.Now;
-            comboBoxNhaCC.SelectedIndex = 0;
-            dataGridViewCTPN.Rows.Clear();
-            textBoxMaSPPN.Clear();
-            textBoxTenSPPN.Clear();
-            textBoxDonGiaNhap.Clear();
-            textBoxSoLuongNhap.Clear();
-            textBoxTenSPPN.Clear();
-        }
-
-        private void dataGridViewCTPN_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 4)
-            {
-                var confirmMsg = MessageBox.Show("Bạn có muốn xoá?", "Thông báo", MessageBoxButtons.YesNo);
-
-                if (confirmMsg == DialogResult.Yes)
-                {
-                    dataGridViewCTPN.Rows.RemoveAt(e.RowIndex);
-                }
-            }
-        }
-
-        private void dataGridViewPN_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int id = int.Parse(dataGridViewPN.Rows[e.RowIndex].Cells[0].Value.ToString());
-            PhieuNhap itemChange = db.PhieuNhaps.SingleOrDefault(item => item.MaPN == id);
-
-            if (e.ColumnIndex == 4)
-            {
-                var confirmMsg = MessageBox.Show("Bạn có muốn xoá?", "Thông báo", MessageBoxButtons.YesNo);
-
-                if (confirmMsg == DialogResult.Yes)
-                {
-                    // Lấy danh sách chi tiết phiếu nhập
-                    var listCTPN = from ct in db.ChiTietPhieuNhaps
-                                   where ct.MaPN == id
-                                   select new { ct.MaSP, ct.SoLuongNhap };
-
-                    // Giảm số lượng sản phẩm tương ứng
-                    foreach(var ct in listCTPN)
-                    {
-                        SanPham sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == ct.MaSP);
-                        sanPham.SoLuong = sanPham.SoLuong - ct.SoLuongNhap;
-                        db.SubmitChanges();
-                    }
-                    db.PhieuNhaps.DeleteOnSubmit(itemChange);
-                    db.SubmitChanges();
-                    ShowPhieuNhap();
-                }
-            }
-
+            int id = int.Parse(grPhieuNhapHang.Rows[e.RowIndex].Cells[0].Value.ToString());
             if (e.ColumnIndex == 3)
             {
-                EditPhieuNhap f = new EditPhieuNhap();
+                ViewPhieuNhapHang f = new ViewPhieuNhapHang();
+                f.Tag = id;
+                f.ShowDialog();
+            }
+        }
+        private void HienThiPhieuNhapHang()
+        {
+            grPhieuNhapHang.Rows.Clear();
+            var danhSach = from ptu in db.PhieuNhaps
+                           orderby ptu.MaPN descending
+                           select new { ptu.MaPN, ptu.NgayNhapHang, ptu.MaPDH };
+
+            foreach (var phanTu in danhSach)
+            {
+                DataGridViewRow hang = (DataGridViewRow)grPhieuNhapHang.Rows[0].Clone();
+
+                hang.Cells[0].Value = phanTu.MaPN;
+                hang.Cells[1].Value = phanTu.NgayNhapHang;
+                hang.Cells[2].Value = phanTu.MaPDH;
+                hang.Cells[3].Value = "Xem chi tiết";
+
+                grPhieuNhapHang.Rows.Add(hang);
+            }
+        }
+
+        /*
+            PhieuDatHang - PDH
+            @author: Dang Duc Tung
+         */
+
+        private void HienThiPhieuDatHang()
+        {
+            grPhieuDatHang.Rows.Clear();
+            var danhSach = from ptu in db.PhieuDatHangs
+                       orderby ptu.MaPDH descending
+                       select new { ptu.MaPDH, ptu.NgayDatHang, ptu.NhaCungCap.TenNCC };
+
+            foreach (var phanTu in danhSach)
+            {
+                DataGridViewRow hang = (DataGridViewRow)grPhieuDatHang.Rows[0].Clone();
+
+                hang.Cells[0].Value = phanTu.MaPDH;
+                hang.Cells[1].Value = phanTu.NgayDatHang;
+                hang.Cells[2].Value = phanTu.TenNCC;
+                hang.Cells[3].Value = "Xem chi tiết";
+
+                grPhieuDatHang.Rows.Add(hang);
+            }
+        }
+        private void btnPDH_Them_Click(object sender, EventArgs e)
+        {
+            CreatePhieuDatHang f = new CreatePhieuDatHang();
+            f.ShowDialog();
+        }
+        private void grPhieuDatHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = int.Parse(grPhieuDatHang.Rows[e.RowIndex].Cells[0].Value.ToString());
+            if (e.ColumnIndex == 3)
+            {
+                ViewPhieuDatHang f = new ViewPhieuDatHang();
                 f.Tag = id;
                 f.ShowDialog();
             }
@@ -969,6 +816,7 @@ namespace ql_banhang.pages
                 dataGridViewNhanVien.Rows.Add(row);
             }
         }
+
         private void dataGridViewNhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
