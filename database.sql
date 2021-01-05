@@ -53,17 +53,43 @@ Insert into SanPham values
 	('Adidas 02', 200000, 0, 20, 2),
 	('Adidas 03', 300000, 0, 30, 3)
 
+-- PhieuDatHang
+Create table PhieuDatHang (
+	MaPDH int IDENTITY(1,1) PRIMARY KEY,
+	NgayDatHang date DEFAULT GETDATE(),
+	MaNCC int foreign key references NhaCungCap(MaNCC) on delete cascade on update cascade 
+)
+
+Insert into PhieuDatHang values 
+	('2020/3/3', 1),
+	('2020/3/4', 2),
+	('2020/3/5', 3)
+
+-- ChiTietPhieuDatHang
+Create table ChiTietPhieuDatHang (
+	MaPDH int foreign key references PhieuDatHang(MaPDH) on delete cascade on update cascade,
+	MaSP int foreign key references SanPham(MaSP) on delete cascade on update cascade,
+	DonGiaDat int default 0,
+	SoLuongDat int default 0,
+	PRIMARY KEY (MaPDH, MaSP) 
+)
+
+Insert into ChiTietPhieuDatHang values 
+	(1, 1, 10000, 10),
+	(1, 2, 20000, 20),
+	(1, 3, 30000, 30)
+
 -- PhieuNhap
 Create table PhieuNhap (
 	MaPN int IDENTITY(1,1) PRIMARY KEY,
-	NgayLap date DEFAULT GETDATE(),
-	MaNCC int foreign key references NhaCungCap(MaNCC) on delete cascade on update cascade
+	NgayNhapHang date DEFAULT GETDATE(),
+	MaPDH int foreign key references PhieuDatHang(MaPDH) on delete cascade on update cascade
 )
 
 Insert into PhieuNhap values 
 	('2020/3/10', 1),
-	('2020/3/15', 2),
-	('2020/3/20', 3)
+	('2020/3/15', 1),
+	('2020/3/20', 2)
 
 -- ChiTietPhieuNhap
 Create table ChiTietPhieuNhap (
@@ -139,4 +165,5 @@ Insert into ChiTietHoaDon values
 	(1, 2, 5),
 	(1, 3, 6)
 
-Select * from HoaDon
+Select * from PhieuDatHang
+Select * from ChiTietHoaDon

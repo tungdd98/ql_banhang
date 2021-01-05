@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,6 +24,13 @@ namespace ql_banhang
             if (textBoxTenTaiKhoan.Text == "" || textBoxMatKhau.Text == "")
             {
                 MessageBox.Show("Tên tài khoản và mật khẩu không được để trống", "Thông báo");
+                return;
+            }
+
+            string regex = "^[a-z0-9]*$";
+            if (!Regex.IsMatch(textBoxTenTaiKhoan.Text, regex))
+            {
+                MessageBox.Show("Tên tài khoản chỉ được sử dụng ký tự và chữ số", "Thông báo");
                 return;
             }
 

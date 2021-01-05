@@ -31,10 +31,10 @@ namespace ql_banhang
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.buttonLogin = new System.Windows.Forms.Button();
+            this.btnDangNhap = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
@@ -61,22 +61,22 @@ namespace ql_banhang
             this.label2.TabIndex = 1;
             this.label2.Text = "Tên đăng nhập";
             // 
-            // textBoxUsername
+            // tbUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(239, 90);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(246, 29);
-            this.textBoxUsername.TabIndex = 2;
-            this.textBoxUsername.Text = "admin";
+            this.tbUsername.Location = new System.Drawing.Point(239, 90);
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(246, 29);
+            this.tbUsername.TabIndex = 2;
+            this.tbUsername.Text = "admin";
             // 
-            // textBoxPassword
+            // tbPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(239, 136);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(246, 29);
-            this.textBoxPassword.TabIndex = 4;
-            this.textBoxPassword.Text = "123456789";
-            this.textBoxPassword.UseSystemPasswordChar = true;
+            this.tbPassword.Location = new System.Drawing.Point(239, 136);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(246, 29);
+            this.tbPassword.TabIndex = 4;
+            this.tbPassword.Text = "123456789";
+            this.tbPassword.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -89,15 +89,15 @@ namespace ql_banhang
             this.label3.TabIndex = 3;
             this.label3.Text = "Mật khẩu";
             // 
-            // buttonLogin
+            // btnDangNhap
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(181, 197);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(120, 32);
-            this.buttonLogin.TabIndex = 5;
-            this.buttonLogin.Text = "Đăng nhập";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            this.btnDangNhap.Location = new System.Drawing.Point(181, 197);
+            this.btnDangNhap.Name = "btnDangNhap";
+            this.btnDangNhap.Size = new System.Drawing.Size(120, 32);
+            this.btnDangNhap.TabIndex = 5;
+            this.btnDangNhap.Text = "Đăng nhập";
+            this.btnDangNhap.UseVisualStyleBackColor = true;
+            this.btnDangNhap.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // buttonClose
             // 
@@ -128,10 +128,10 @@ namespace ql_banhang
             this.ClientSize = new System.Drawing.Size(613, 262);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.buttonLogin);
-            this.Controls.Add(this.textBoxPassword);
+            this.Controls.Add(this.btnDangNhap);
+            this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBoxUsername);
+            this.Controls.Add(this.tbUsername);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -149,10 +149,10 @@ namespace ql_banhang
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxUsername;
-        private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Button btnDangNhap;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.LinkLabel linkLabel1;
     }

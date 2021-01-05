@@ -36,14 +36,6 @@ namespace ql_banhang
             this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewSP = new System.Windows.Forms.DataGridView();
-            this.masp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.soLuongMua = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.labelNgayLap = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelTenNV = new System.Windows.Forms.Label();
@@ -73,6 +65,13 @@ namespace ql_banhang
             this.buttonNewOrder = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelTotal = new System.Windows.Forms.Label();
+            this.masp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.soLuongMua = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSP)).BeginInit();
@@ -139,72 +138,15 @@ namespace ql_banhang
             this.Column3,
             this.Column8,
             this.thanhTien,
-            this.Column5,
             this.Column6});
             this.dataGridViewSP.Location = new System.Drawing.Point(-39, 0);
             this.dataGridViewSP.Name = "dataGridViewSP";
             this.dataGridViewSP.Size = new System.Drawing.Size(837, 449);
             this.dataGridViewSP.TabIndex = 0;
+            this.dataGridViewSP.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewSP_CellBeginEdit);
             this.dataGridViewSP.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSP_CellClick);
             this.dataGridViewSP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSP_CellContentClick);
-            // 
-            // masp
-            // 
-            this.masp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.masp.FillWeight = 92.59259F;
-            this.masp.HeaderText = "Mã SP";
-            this.masp.Name = "masp";
-            this.masp.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.FillWeight = 92.59259F;
-            this.Column1.HeaderText = "Tên SP";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // soLuongMua
-            // 
-            this.soLuongMua.FillWeight = 92.59259F;
-            this.soLuongMua.HeaderText = "Số lượng";
-            this.soLuongMua.Name = "soLuongMua";
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.FillWeight = 92.59259F;
-            this.Column3.HeaderText = "Đơn giá";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column8.HeaderText = "Chiết khấu";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // thanhTien
-            // 
-            this.thanhTien.FillWeight = 129.6296F;
-            this.thanhTien.HeaderText = "Thành tiền";
-            this.thanhTien.Name = "thanhTien";
-            this.thanhTien.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 85;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 85;
+            this.dataGridViewSP.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSP_CellEndEdit);
             // 
             // labelNgayLap
             // 
@@ -518,6 +460,57 @@ namespace ql_banhang
             this.labelTotal.Text = "0";
             this.labelTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // masp
+            // 
+            this.masp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.masp.FillWeight = 92.59259F;
+            this.masp.HeaderText = "Mã SP";
+            this.masp.Name = "masp";
+            this.masp.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.FillWeight = 92.59259F;
+            this.Column1.HeaderText = "Tên SP";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // soLuongMua
+            // 
+            this.soLuongMua.FillWeight = 92.59259F;
+            this.soLuongMua.HeaderText = "Số lượng";
+            this.soLuongMua.Name = "soLuongMua";
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.FillWeight = 92.59259F;
+            this.Column3.HeaderText = "Đơn giá";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column8.HeaderText = "Chiết khấu";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // thanhTien
+            // 
+            this.thanhTien.FillWeight = 129.6296F;
+            this.thanhTien.HeaderText = "Thành tiền";
+            this.thanhTien.Name = "thanhTien";
+            this.thanhTien.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 85;
+            // 
             // OrderManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -586,17 +579,16 @@ namespace ql_banhang
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonSaveOrder;
         private System.Windows.Forms.Button buttonNewOrder;
+        private System.Windows.Forms.TextBox textBoxNote;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn masp;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn soLuongMua;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn thanhTien;
-        private System.Windows.Forms.DataGridViewLinkColumn Column5;
         private System.Windows.Forms.DataGridViewLinkColumn Column6;
-        private System.Windows.Forms.TextBox textBoxNote;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label labelTotal;
     }
 }

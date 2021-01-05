@@ -33,11 +33,11 @@ namespace ql_banhang
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            string username = textBoxUsername.Text;
-            string password = textBoxPassword.Text;
+            string username = tbUsername.Text;
+            string password = tbPassword.Text;
             if (username == "" || password == "")
             {
-                MessageBox.Show("Username và password không được để rỗng");
+                MessageBox.Show("Username và password không được để trống");
                 return;
             }
             NhanVien nhanVien = db.NhanViens.SingleOrDefault(nv => nv.Username == username && nv.Password == password);
@@ -49,7 +49,7 @@ namespace ql_banhang
                 this.Hide();
                 f.ShowDialog();
                 this.Show();
-                textBoxPassword.Clear();
+                tbPassword.Clear();
             }
             else
             {
