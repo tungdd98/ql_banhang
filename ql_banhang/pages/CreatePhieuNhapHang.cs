@@ -36,20 +36,23 @@ namespace ql_banhang.pages
         }
         private void HienThiThongTinSanPhamTuongUng()
         {
-            try
+            if (cbSanPham.Items.Count > 0)
             {
-                int maSP = int.Parse(cbSanPham.SelectedValue.ToString());
-                sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == maSP);
-                var timKiem = db.ChiTietPhieuDatHangs.SingleOrDefault(ptu => ptu.MaPDH == maPDH && ptu.MaSP == maSP);
+                try
+                {
+                    int maSP = int.Parse(cbSanPham.SelectedValue.ToString());
+                    sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == maSP);
+                    var timKiem = db.ChiTietPhieuDatHangs.SingleOrDefault(ptu => ptu.MaPDH == maPDH && ptu.MaSP == maSP);
 
-                tbDonGiaDat.Text = timKiem.DonGiaDat.ToString();
-                tbSoLuongDat.Text = timKiem.SoLuongDat.ToString();
-            }
-            catch (Exception)
-            {
-                tbDonGiaDat.Clear();
-                tbSoLuongDat.Clear();
-                return;
+                    tbDonGiaDat.Text = timKiem.DonGiaDat.ToString();
+                    tbSoLuongDat.Text = timKiem.SoLuongDat.ToString();
+                }
+                catch (Exception)
+                {
+                    tbDonGiaDat.Clear();
+                    tbSoLuongDat.Clear();
+                    return;
+                }
             }
         }
         private void HienThiCbPhieuDatHang()
@@ -239,6 +242,9 @@ namespace ql_banhang.pages
                 chiTietPN.MaPN = phieuNhap.MaPN;
                 chiTietPN.MaSP = int.Parse(hang.Cells[0].Value.ToString());
                 chiTietPN.SoLuongNhap = int.Parse(hang.Cells[3].Value.ToString());
+
+                var sanPham = db.SanPhams.SingleOrDefault(sp => sp.MaSP == chiTietPN.MaSP);
+                sanPham.SoLuong = sanPham.SoLuong + chiTietPN.SoLuongNhap;
 
                 db.ChiTietPhieuNhaps.InsertOnSubmit(chiTietPN);
                 db.SubmitChanges();
