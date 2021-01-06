@@ -544,6 +544,7 @@ namespace ql_banhang.pages
         private void btnPNH_Them_Click(object sender, EventArgs e)
         {
             CreatePhieuNhapHang f = new CreatePhieuNhapHang();
+            tabIndex = 8;
             f.ShowDialog();
         }
         private void grPhieuNhapHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -603,6 +604,7 @@ namespace ql_banhang.pages
         private void btnPDH_Them_Click(object sender, EventArgs e)
         {
             CreatePhieuDatHang f = new CreatePhieuDatHang();
+            tabIndex = 7;
             f.ShowDialog();
         }
         private void grPhieuDatHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
